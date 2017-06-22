@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Extractor.Models
 {
-	public class FileData : Common.ViewModelBase
+	public class FileData : FileDataBase
 	{
 		public FileData(LZSS.FileItem lzssFileInfo)
 		{
@@ -20,16 +20,17 @@ namespace Extractor.Models
 			}
 			this.name = lzssFileInfo.Name;
 			this.size = lzssFileInfo.Size;
-			this.formatSize(lzssFileInfo.Size);
+			this.formattedSize = formatSize(lzssFileInfo.Size);
 			this.outputName = string.Format("{0}{1}", lzssFileInfo.Name, lzssFileInfo.Index < 1 ? "" : lzssFileInfo.Index.ToString());
-			this.index = string.Format(" - {0}", lzssFileInfo.Index + 1);
+			//this.index = string.Format(" - {0}", lzssFileInfo.Index + 1);
+			this.treeNode = new TreeNodeModel(this);
 		}
 
-		private string name;
-		public string Name
-		{
-			get { return this.name; }
-		}
+		//private string name;
+		//public string Name
+		//{
+		//	get { return this.name; }
+		//}
 
 		private long size;
 		public long Size
@@ -37,11 +38,11 @@ namespace Extractor.Models
 			get { return this.size; }
 		}
 
-		private string index;
-		public string Index
-		{
-			get { return this.index; }
-		}
+		//private string index;
+		//public string Index
+		//{
+		//	get { return this.index; }
+		//}
 
 		private string formattedSize;
 		public string FormattedSize
@@ -49,21 +50,21 @@ namespace Extractor.Models
 			get { return this.formattedSize; }
 		}
 
-		private bool isSelected;
-		public bool IsSelected
-		{
-			get { return this.isSelected; }
-			set
-			{
-				if (this.isSelected != value)
-				{
-					this.isSelected = value;
-					this.NotifyPropertyChangedAsync("IsSelected");
-				}
-			}
-		}
+		//private bool isSelected;
+		//public bool IsSelected
+		//{
+		//	get { return this.isSelected; }
+		//	set
+		//	{
+		//		if (this.isSelected != value)
+		//		{
+		//			this.isSelected = value;
+		//			this.NotifyPropertyChangedAsync("IsSelected");
+		//		}
+		//	}
+		//}
 
-		private void formatSize(long size)
+		private static string formatSize(long size)
 		{
 			List<char> units = new List<char>()
 			{
@@ -91,7 +92,7 @@ namespace Extractor.Models
 				}
 				level++;
 			}
-			this.formattedSize = string.Format("{0} {1}", size, units[level]);
+			return string.Format("{0} {1}", size, units[level]);
 		}
 
 		private string outputName;
@@ -100,6 +101,9 @@ namespace Extractor.Models
 			get { return this.outputName; }
 		}
 
-		public FolderData ParentFolder { get; set; }
+		public override string ToString()
+		{
+			return this.OutputName;
+		}
 	}
 }

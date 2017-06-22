@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Extractor.Controls
 {
@@ -13,59 +14,67 @@ namespace Extractor.Controls
 	{
 		public FolderDataPersenter()
 		{
-			VirtualizingStackPanel.SetIsVirtualizing(this, false);
-
-			this.Dispatcher.BeginInvoke(
-				(Action)this.setExpandingEventListener,
-				 System.Windows.Threading.DispatcherPriority.Loaded);
+			VirtualizingStackPanel.SetIsVirtualizing(this, true);
+			this.Focusable = false;
 		}
 
-		private void setExpandingEventListener()
+		protected override System.Windows.DependencyObject GetContainerForItemOverride()
 		{
-			if (this.Template != null)
-			{
-				var expander = this.Template.FindName("Expander", this) as ToggleButton;
-				if (expander != null)
-				{
-					expander.PreviewMouseLeftButtonDown += this.onExpanderPreviewMouseLeftButtonDown;
-				}
-			}
+			return new FolderDataPersenter();
 		}
 
-		private void onExpanderPreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		protected override bool IsItemItsOwnContainerOverride(object item)
 		{
-			e.Handled = true;
-
-			this.Dispatcher.BeginInvoke((Action)delegate
-			{
-				this.IsExpanded = !this.IsExpanded; // no work here
-			}, System.Windows.Threading.DispatcherPriority.Render);
+			return item is FolderDataPersenter;
 		}
+
+		#region drag & drop
+
+		private bool isFirstOnApplyTemplate = false;
 
 		public override void OnApplyTemplate()
 		{
 			base.OnApplyTemplate();
 
-			Business.TreeViewExpandingCounter.StepForward();
-		}
-
-		protected override void OnExpanded(RoutedEventArgs e)
-		{
-			var folder = this.DataContext as Models.FolderData;
-			if (folder != null)
+			if (Business.ReferenceComparer.Left == null)
 			{
-				if (folder.SubFolders.Count > 100)
-				{
-					Business.TreeViewExpandingCounter.Finish += this.onExpandingCounterDone;
-					Business.TreeViewExpandingCounter.Set(folder.SubFolders.Count);
-				}
+				Business.ReferenceComparer.Left = this;
 			}
-			base.OnExpanded(e);
+			else
+			{
+				Business.ReferenceComparer.Right = this;
+				bool equal = Business.ReferenceComparer.IsReferenceEqual(); 
+				//false returned, so it's not the same Control between two call.
+			}
+
+			//if (this.Template != null)
+			//{
+			//	var headerContentPresenter= this.Template.FindName("PART_Header", this) as ContentPresenter;
+			//	if (headerContentPresenter != null)
+			//	{
+			//		var headerContent = headerContentPresenter.Content;
+					
+			//	}
+			//}
+
+			//var contentPresenter = this.FindVisualChild<ContentPresenter>();
+			//if (contentPresenter != null && contentPresenter.ContentTemplate != null)
+			//{
+			//	DataTemplate contentTemplate = contentPresenter.ContentTemplate;
+			//	var dragableGizmo = contentTemplate.FindName("dragableGizmo", contentPresenter);
+			//	if (dragableGizmo != null)
+			//	{
+
+			//	}
+			//}
 		}
 
-		private void onExpandingCounterDone()
+		protected override void OnPreviewDragEnter(DragEventArgs e)
 		{
-			Business.TreeViewExpandingCounter.Finish -= this.onExpandingCounterDone;
+
+			base.OnPreviewDragEnter(e);
 		}
+
+		#endregion drag & drop
 	}
 }
