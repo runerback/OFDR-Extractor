@@ -17,7 +17,7 @@ namespace Extractor.Business
 			{
 				return
 					Task.Factory.StartNew<IList<Models.LZSS.FileItem>>(parseNameSize, fileMap)
-					.ContinueWith<IList<Models.LZSS.FileItem>>(parseIndexInParallel, TaskContinuationOptions.NotOnFaulted)
+					.ContinueWith<IList<Models.LZSS.FileItem>>(parseIndex, TaskContinuationOptions.NotOnFaulted)
 					.ContinueWith<Models.FolderData>(convert, TaskContinuationOptions.NotOnFaulted)
 					.Result;
 			}
@@ -25,13 +25,20 @@ namespace Extractor.Business
 			{
 				throw;
 			}
+			finally
+			{
+				Business.StatusManager.Instance.UpdateProgress(1.0);
+				Business.StatusManager.Instance.UpdateStatus(null);
+			}
 		}
 
 		private static readonly string parserToken = @"(?<name>(\w+\.)*\w+|\w+\.\w+)\s+(?<size>\d+)";
 
 		private static IList<Models.LZSS.FileItem> parseNameSize(object fileMapObj)
 		{
-			Console.WriteLine("parseNameSize start");
+			var checker = Business.CodeTimeChecker.New;
+			Business.StatusManager.Instance.UpdateProgress(0.3);
+			Business.StatusManager.Instance.UpdateStatus("pasering name and size...");
 			try
 			{
 				var fileMap = fileMapObj as string;
@@ -64,14 +71,16 @@ namespace Extractor.Business
 			}
 			finally
 			{
-				Console.WriteLine("parseNameSize end");
+				checker.Check("LZSSFileMapParser.parseNameSize");
 			}
 		}
 
 		/// <remarks>slower than parseNameSize method</remarks>
 		private static IList<Models.LZSS.FileItem> parseNameSizeUpdated(object fileMapObj)
 		{
-			Console.WriteLine("parseNameSizeUpdated start");
+			var checker = Business.CodeTimeChecker.New;
+			Business.StatusManager.Instance.UpdateProgress(0.3);
+			Business.StatusManager.Instance.UpdateStatus("pasering name and size...");
 			try
 			{
 				var fileMap = fileMapObj as string;
@@ -112,63 +121,15 @@ namespace Extractor.Business
 			}
 			finally
 			{
-				Console.WriteLine("parseNameSizeUpdated end");
+				checker.Check("LZSSFileMapParser.parseNameSizeUpdated");
 			}
 		}
 
 		private static IList<Models.LZSS.FileItem> parseIndex(Task<IList<Models.LZSS.FileItem>> parseNameSizeTask)
 		{
-			Console.WriteLine("parseIndex start");
-			try
-			{
-				if (parseNameSizeTask.Exception != null)
-				{
-					throw parseNameSizeTask.Exception;
-				}
-
-				var items = parseNameSizeTask.Result;
-				if (items == null || items.Count == 0) { return null; }
-
-				Dictionary<string, int> indexMap = new Dictionary<string, int>();
-				List<string> names = new List<string>();
-				foreach (var item in items)
-				{
-					if (item.Size == 0) { continue; } //0 means folder	
-					
-					string name = item.Name;
-					if (!names.Contains(name))
-					{
-						names.Add(name);
-						indexMap.Add(name, 0);
-					}
-					else
-					{
-						item.Index = ++indexMap[name];
-					}
-				}
-
-				//Console.WriteLine("distCount - {0}", indexMap.Count);
-
-				//int mission_xml_count = items.Reverse()
-				//    .First(item => item.Name == "mission.xml")
-				//    .Index + 1;
-				//Console.WriteLine("mission_xml_count - {0}", mission_xml_count);
-
-				return items;
-			}
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				Console.WriteLine("parseIndex end");
-			}
-		}
-
-		private static IList<Models.LZSS.FileItem> parseIndexInParallel(Task<IList<Models.LZSS.FileItem>> parseNameSizeTask)
-		{
-			Console.WriteLine("parseIndexInParallel start");
+			var checker = Business.CodeTimeChecker.New;
+			Business.StatusManager.Instance.UpdateProgress(0.6);
+			Business.StatusManager.Instance.UpdateStatus("pasering indexes...");
 			try
 			{
 				if (parseNameSizeTask.Exception != null)
@@ -200,46 +161,13 @@ namespace Extractor.Business
 					}
 				});
 
-				//var combinedMap = new Dictionary<string, int>();
-				//maps.ForEach(map =>
-				//{
-				//    foreach (var pair in map)
-				//    {
-				//        if (!combinedMap.ContainsKey(pair.Key))
-				//        {
-				//            combinedMap.Add(pair.Key, pair.Value);
-				//        }
-				//        else
-				//        {
-				//            combinedMap[pair.Key] += pair.Value;
-				//        }
-				//    }
-				//});
-
-				//Console.WriteLine("distCount - {0}", combinedMap.Count);
-
 				foreach (var item in items.Reverse())
 				{
 					if (item.Size == 0) { continue; } //0 means folder	
 
 					item.Index = calculateIndex(item.Name, maps);
-
-					//if (item.Name == "mission.xml" && item.Index == 2)
-					//{
-
-					//}
 				}
-
-				//int mission_xml_count = items.Reverse()
-				//    .First(item => item.Name == "mission.xml")
-				//    .Index + 1;
-				//Console.WriteLine("mission_xml_count - {0}", mission_xml_count);
-
-				//var aaa = items
-				//    .Where(item => item.Name == "mission.xml")
-				//    .Select(item => item.Index)
-				//    .ToList();
-
+				
 				return items;
 			}
 			catch
@@ -248,7 +176,7 @@ namespace Extractor.Business
 			}
 			finally
 			{
-				Console.WriteLine("parseIndexInParallel end");
+				checker.Check("LZSSFileMapParser.parseIndexInParallel");
 			}
 		}
 
@@ -325,7 +253,9 @@ namespace Extractor.Business
 
 		private static Models.FolderData convert(Task<IList<Models.LZSS.FileItem>> parseIndexTask)
 		{
-			Console.WriteLine("convert start");
+			var checker = Business.CodeTimeChecker.New;
+			Business.StatusManager.Instance.UpdateProgress(0.9);
+			Business.StatusManager.Instance.UpdateStatus("converting...");
 			try
 			{
 				if (parseIndexTask.Exception != null)
@@ -365,7 +295,7 @@ namespace Extractor.Business
 			}
 			finally
 			{
-				Console.WriteLine("convert end");
+				checker.Check("LZSSFileMapParser.convert");
 			}
 		}
 	}

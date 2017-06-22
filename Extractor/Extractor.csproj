@@ -68,22 +68,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Business\CodeTimeChecker.cs" />
     <Compile Include="Business\DATManager.cs" />
     <Compile Include="Business\ExceptionManager.cs" />
     <Compile Include="Business\LZSSFileMapParser.cs" />
-    <Compile Include="Business\ProgressManager.cs" />
-    <Compile Include="Business\TreeViewExpandingCounter.cs" />
+    <Compile Include="Business\ReferenceComparer.cs" />
+    <Compile Include="Business\StatusManager.cs" />
     <Compile Include="Common\AutoInvokeObservableCollection.cs" />
+    <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
-    <Compile Include="Controls\FileMapItemTemplateSelector.cs" />
-    <Compile Include="Controls\FileMapPresenter.cs" />
-    <Compile Include="Controls\FolderDataPersenter.cs" />
+    <Compile Include="Controls\FileMapPresenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\FolderDataPersenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controls\OperationControlBox.xaml.cs">
       <DependentUpon>OperationControlBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ProgressPresenter.cs" />
+    <Compile Include="Controls\StatusPresenter.cs" />
     <Compile Include="Extensions\CountExtension.cs" />
+    <Compile Include="Extensions\ForeachExtension.cs" />
+    <Compile Include="Extensions\VisualExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -93,10 +100,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\View\OperationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\View\StatusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -131,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Files\FileData.cs" />
+    <Compile Include="Models\Files\FileDataBase.cs" />
     <Compile Include="Models\Files\FolderData.cs" />
     <Compile Include="Models\TreeNode\TreeNodeModel.cs" />
     <Compile Include="Models\TreeNode\TreeNodeState.cs" />
@@ -140,15 +144,11 @@
     <Compile Include="Presentation\Controller\PageController.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\OperationsViewModel.cs" />
-    <Compile Include="Presentation\ViewModel\StatusViewModel.cs" />
     <Compile Include="Presentation\View\FileMapManagerView.xaml.cs">
       <DependentUpon>FileMapManagerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\View\OperationsView.xaml.cs">
       <DependentUpon>OperationsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\View\StatusView.xaml.cs">
-      <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -18,9 +18,7 @@ namespace Extractor.Presentation.Controller
 			this.fileMapManagerViewModel = new ViewModel.FileMapManagerViewModel();
 			this.fileMapManagerView.DataContext = this.fileMapManagerViewModel;
 
-			this.statusView = new View.StatusView();
-			this.statusViewModel = new ViewModel.StatusViewModel();
-			this.statusView.DataContext = this.statusViewModel;
+			this.statusView = new Controls.StatusPresenter();
 		}
 
 		private View.OperationsView operationsView;
@@ -37,11 +35,10 @@ namespace Extractor.Presentation.Controller
 		}
 		private ViewModel.FileMapManagerViewModel fileMapManagerViewModel;
 
-		private View.StatusView statusView;
+		private Controls.StatusPresenter statusView;
 		public FrameworkElement StatusView
 		{
 			get { return this.statusView; }
 		}
-		private ViewModel.StatusViewModel statusViewModel;
 	}
 }

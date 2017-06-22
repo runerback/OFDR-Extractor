@@ -3,47 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Extractor.Presentation.View"
+             xmlns:models="clr-namespace:Extractor.Models"
              xmlns:controls="clr-namespace:Extractor.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <controls:FileMapItemTemplateSelector x:Key="templateSelector" />
-    </UserControl.Resources>
-    <ScrollViewer HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <controls:FileMapPresenter ItemsSource="{Binding RootSource, Mode=OneWay}"
-                          ItemTemplateSelector="{StaticResource templateSelector}">
-            <controls:FileMapPresenter.Resources>
-                <DataTemplate x:Key="folder_template">
-                    <controls:FolderDataPersenter ItemsSource="{Binding Source, Mode=OneWay}"
-                                   ItemTemplateSelector="{StaticResource templateSelector}">
-                        <controls:FolderDataPersenter.Header>
-                            <Grid HorizontalAlignment="Stretch">
-                                <ToggleButton IsChecked="{Binding IsSelected, Mode=OneWay}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsThreeState="True" IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        <Image Source="{StaticResource type_folder}" Height="16" Width="16" />
-                                        <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                                    </StackPanel>
-                                </ToggleButton>
-                            </Grid>
-                        </controls:FolderDataPersenter.Header>
-                    </controls:FolderDataPersenter>
-                </DataTemplate>
 
-                <DataTemplate x:Key="file_template">
-                    <ToggleButton IsChecked="{Binding IsSelected, Mode=OneWay}">
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-                            <Image Source="{StaticResource type_file}" Height="16" Width="16" />
-                            <TextBlock Text="{Binding Name, Mode=OneWay}" />
-                            <TextBlock Text="{Binding FormattedSize, Mode=OneWay}" />
-                            <TextBlock Text="{Binding Index, Mode=OneWay}" />
-                        </StackPanel>
-                    </ToggleButton>
-                </DataTemplate>
-            </controls:FileMapPresenter.Resources>
-        </controls:FileMapPresenter>
-    </ScrollViewer>
+        <DataTemplate DataType="{x:Type models:TreeNodeType}">
+            <Image Height="16" Width="16">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeType.Folder}">
+                                <Setter Property="Source" Value="{StaticResource type_folder}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeType.File}">
+                                <Setter Property="Source" Value="{StaticResource type_file}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type models:TreeNodeState}">
+            <Image Height="12" Width="12" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeState.StandBy}">
+                                <Setter Property="Source" Value="{StaticResource state_standby}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeState.Processing}">
+                                <Setter Property="Source" Value="{StaticResource state_processing}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeState.Ready}">
+                                <Setter Property="Source" Value="{StaticResource state_ready}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding .}" Value="{x:Static models:TreeNodeState.Error}">
+                                <Setter Property="Source" Value="{StaticResource state_error}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </DataTemplate>
+
+        <HierarchicalDataTemplate DataType="{x:Type models:FolderData}" ItemsSource="{Binding Source, Mode=OneWay}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsThreeState="True" IsChecked="{Binding TreeNode.IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ContentControl Content="{Binding TreeNode.NodeType, Mode=OneWay}" />
+                <ToggleButton IsChecked="{Binding TreeNode.IsSelected, Mode=OneWay}" Name="dragableGizmo">
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                </ToggleButton>
+                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        
+        <DataTemplate x:Key="file_template" DataType="{x:Type models:FileData}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox IsChecked="{Binding TreeNode.IsSelected, Mode=TwoWay}" />
+                <ContentControl Content="{Binding TreeNode.NodeType, Mode=OneWay}" />
+                <ToggleButton IsChecked="{Binding TreeNode.IsSelected, Mode=OneWay}" Name="dragableGizmo">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <TextBlock Text="{Binding Name, Mode=OneWay}" />
+                        <TextBlock Text="{Binding FormattedSize, Mode=OneWay}" />
+                    </StackPanel>
+                </ToggleButton>
+                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0" />
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <controls:FileMapPresenter ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" Margin="6 0" />
 </UserControl>

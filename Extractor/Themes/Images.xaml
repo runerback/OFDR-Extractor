@@ -5,10 +5,10 @@
     <Image x:Key="btn_resume" Stretch="Fill" Source="/Resources/Images/btn_resume.png" />
     <Image x:Key="btn_stop" Stretch="Fill" Source="/Resources/Images/btn_stop.png" />
     <Image x:Key="btn_stopped" Stretch="Fill" Source="/Resources/Images/btn_stopped.png" />
-    <Image x:Key="state_error" Stretch="Fill" Source="/Resources/Images/state_error.png" />
-    <Image x:Key="state_processing" Stretch="Fill" Source="/Resources/Images/state_processing.png" />
-    <Image x:Key="state_ready" Stretch="Fill" Source="/Resources/Images/state_ready.png" />
-    <Image x:Key="state_standby" Stretch="Fill" Source="/Resources/Images/state_standby.png" />
+    <BitmapImage x:Key="state_error" UriSource="/Resources/Images/state_error.png" />
+    <BitmapImage x:Key="state_processing" UriSource="/Resources/Images/state_processing.png" />
+    <BitmapImage x:Key="state_ready" UriSource="/Resources/Images/state_ready.png" />
+    <BitmapImage x:Key="state_standby" UriSource="/Resources/Images/state_standby.png" />
     <BitmapImage x:Key="type_file" UriSource="/Resources/Images/type_file.png" />
     <BitmapImage x:Key="type_folder" UriSource="/Resources/Images/type_folder.png" />
 </ResourceDictionary>
