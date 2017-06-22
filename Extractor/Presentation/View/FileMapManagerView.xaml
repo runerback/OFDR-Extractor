@@ -60,7 +60,7 @@
             </StackPanel>
         </HierarchicalDataTemplate>
         
-        <DataTemplate x:Key="file_template" DataType="{x:Type models:FileData}">
+        <DataTemplate DataType="{x:Type models:FileData}">
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding TreeNode.IsSelected, Mode=TwoWay}" />
                 <ContentControl Content="{Binding TreeNode.NodeType, Mode=OneWay}" />
