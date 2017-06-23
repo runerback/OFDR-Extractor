@@ -30,7 +30,7 @@ namespace Extractor.Controls
 
 		#region drag & drop
 
-		private bool isFirstOnApplyTemplate = false;
+		//private bool isFirstOnApplyTemplate = false;
 
 		public override void OnApplyTemplate()
 		{

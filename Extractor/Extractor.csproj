@@ -78,6 +78,7 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Controls\DraggableGizmo.cs" />
     <Compile Include="Controls\FileMapPresenter.cs">
       <SubType>Code</SubType>
     </Compile>
