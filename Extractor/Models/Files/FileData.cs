@@ -26,12 +26,6 @@ namespace Extractor.Models
 			this.treeNode = new TreeNodeModel(this);
 		}
 
-		//private string name;
-		//public string Name
-		//{
-		//	get { return this.name; }
-		//}
-
 		private long size;
 		public long Size
 		{
@@ -50,20 +44,6 @@ namespace Extractor.Models
 			get { return this.formattedSize; }
 		}
 
-		//private bool isSelected;
-		//public bool IsSelected
-		//{
-		//	get { return this.isSelected; }
-		//	set
-		//	{
-		//		if (this.isSelected != value)
-		//		{
-		//			this.isSelected = value;
-		//			this.NotifyPropertyChangedAsync("IsSelected");
-		//		}
-		//	}
-		//}
-
 		private static string formatSize(long size)
 		{
 			List<char> units = new List<char>()
@@ -77,7 +57,7 @@ namespace Extractor.Models
 				{
 					if (size < 1000)
 					{
-						break; //size = size;
+						break;
 					}
 					else
 					{
