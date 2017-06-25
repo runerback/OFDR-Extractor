@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files %28x86%29\NUnit 2.6.4\bin\nunit.exe</StartProgram>
+    <StartProgram>D:\SOFTWARE\Code\NUnit\2.6.4\bin\nunit.exe</StartProgram>
     <StartArguments>UnitTest.dll</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
