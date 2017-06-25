@@ -15,6 +15,11 @@ namespace Extractor.Controls
 			this.AllowDrop = true;
 		}
 
+		/// <summary>
+		/// prevent IsChecked state changing by click
+		/// </summary>
+		protected override void OnToggle() { }
+
 		protected override void OnContentChanged(object oldContent, object newContent)
 		{
 			if (newContent != null)
@@ -22,7 +27,6 @@ namespace Extractor.Controls
 				var element = newContent as FrameworkElement;
 				if (element != null)
 				{
-					element.AllowDrop = false;
 					element.Focusable = false;
 				}
 			}
@@ -30,36 +34,55 @@ namespace Extractor.Controls
 
 		protected override void OnPreviewDragEnter(System.Windows.DragEventArgs e)
 		{
-			if (object.ReferenceEquals(e.Source, this))
+			var dataObj = Models.DragDropDataObject.Parse(e.Data);
+			if (dataObj.Source != this) //not self dragdrop
 			{
-				e.Effects = DragDropEffects.None;
-				e.Handled = true;
-				this.isSelfDragging = true;
+				var sourceFileData = dataObj.Data as Models.FileDataBase;
+				if (sourceFileData != null)
+				{
+					if (sourceFileData.CanMoveTo(this.DataContext as Models.FileDataBase))
+					{
+						e.Effects = DragDropEffects.Move;
+						this.canDrop = true;
+						return;
+					}
+				}
 			}
-			else
-			{
-				this.isSelfDragging = false;
-			}
-			base.OnPreviewDragEnter(e);
+			e.Effects = DragDropEffects.None;
+			e.Handled = true;
+			this.canDrop = false;
 		}
 
 		protected override void OnPreviewDragOver(DragEventArgs e)
 		{
-			if (this.isSelfDragging)
+			if (this.canDrop)
+			{
+				e.Effects = DragDropEffects.Move;
+			}
+			else
 			{
 				e.Effects = DragDropEffects.None;
 				e.Handled = true;
 			}
-			base.OnPreviewDragOver(e);
 		}
 
 		protected override void OnDrop(System.Windows.DragEventArgs e)
 		{
+			var dataObj = Models.DragDropDataObject.Parse(e.Data);
+			var sourceFileData = dataObj.Data as Models.FileDataBase;
+			if (sourceFileData != null)
+			{
+				sourceFileData.MoveTo(this.DataContext as Models.FileDataBase);
+			}
+
 			base.OnDrop(e);
 		}
 
+
+
 		private bool isDragging;
-		private bool isSelfDragging;
+		private bool canDrop;
+		private Point lastPressedLocation;
 
 		protected override void OnPreviewMouseMove(System.Windows.Input.MouseEventArgs e)
 		{
@@ -67,13 +90,24 @@ namespace Extractor.Controls
 			{
 				if (!this.isDragging)
 				{
-					this.isDragging = true;
-
-					var data = this.DataContext as Models.FileDataBase;
-					if (data != null)
+					Point newLocation = e.GetPosition(this);
+					if (this.lastPressedLocation != newLocation)
 					{
-						DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
-						e.Handled = true;
+						this.lastPressedLocation = newLocation;
+						this.isDragging = true;
+
+						if (this.DataContext != null)
+						{
+							var data = Models.DragDropDataObject.Create(
+								this,
+								this.DataContext);
+							DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+							e.Handled = true;
+						}
+					}
+					else
+					{
+						this.isDragging = false;
 					}
 				}
 			}

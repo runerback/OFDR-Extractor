@@ -50,7 +50,19 @@ namespace Extractor.Models
 				this.subFolders.Add(subFolder);
 				subFolder.ParentFolder = this;
 				subFolder.level = this.level + 1;
-				this.source.Add(subFolder);
+
+				//this.source.Add(subFolder);
+				//should be ordered
+				int index = this.source.LastIndexOf(
+					item => item.TreeNode.NodeType == TreeNodeType.Folder);
+				if (index < 0)
+					this.source.Insert(0, subFolder);
+				else if (index < this.source.Count)
+					this.source.Add(subFolder);
+				else
+					this.source.Insert(index - 1, subFolder);
+
+				this.NotifyPropertyChanged("Source");
 			}
 		}
 
@@ -63,6 +75,7 @@ namespace Extractor.Models
 					subFolder.ParentFolder = null;
 					subFolder.level = -1;
 					this.source.Remove(subFolder);
+					this.NotifyPropertyChanged("Source");
 				}
 			}
 		}
@@ -74,10 +87,11 @@ namespace Extractor.Models
 				this.files.Add(file);
 				file.ParentFolder = this;
 				this.source.Add(file);
+				this.NotifyPropertyChanged("Source");
 			}
 		}
 
-		public void RemoveFile(FileData file)
+		public void Remove(FileData file)
 		{
 			if (file != null && this.files.Contains(file))
 			{
@@ -85,8 +99,56 @@ namespace Extractor.Models
 				{
 					file.ParentFolder = null;
 					this.source.Remove(file);
+					this.NotifyPropertyChanged("Source");
 				}
 			}
+		}
+
+		public void Add(FileDataBase fileData)
+		{
+			if (fileData != null)
+			{
+				if (fileData.TreeNode.NodeType == TreeNodeType.File)
+				{
+					this.Add(fileData as FileData);
+				}
+				else if (fileData.TreeNode.NodeType == TreeNodeType.Folder)
+				{
+					this.Add(fileData as FolderData);
+				}
+			}
+		}
+
+		public void Remove(FileDataBase fileData)
+		{
+			if (fileData != null)
+			{
+				if (fileData.TreeNode.NodeType == TreeNodeType.File)
+				{
+					this.Remove(fileData as FileData);
+				}
+				else if (fileData.TreeNode.NodeType == TreeNodeType.Folder)
+				{
+					this.Remove(fileData as FolderData);
+				}
+			}
+		}
+
+		public override bool CanMoveTo(FileDataBase destination)
+		{
+			//moving parent folder into child folder is not handled.
+			if (destination.TreeNode.NodeType == TreeNodeType.File)
+			{
+				if (destination.ParentFolder == this ||
+					destination.ParentFolder == this.ParentFolder)
+					return false;
+			}
+			else if (destination.TreeNode.NodeType == TreeNodeType.Folder)
+			{
+				if (destination as FolderData == this.ParentFolder)
+					return false;
+			}
+			return true;
 		}
 	}
 }

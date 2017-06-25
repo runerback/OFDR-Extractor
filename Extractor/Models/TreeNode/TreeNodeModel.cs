@@ -54,6 +54,7 @@ namespace Extractor.Models
 							this.isSelected = value;
 						}
 					}
+					this.fileData.NotifyPropertyChangedAsync("IsChecked");
 					this.onSelectionStateChanged(value);
 				}
 			}

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Business\DATManagerTest.cs" />
     <Compile Include="Business\LZSSFileMapParserTest.cs" />
+    <Compile Include="Extensions\LinqExtensionTest.cs" />
     <Compile Include="Models\Files\FileDataTest.cs" />
     <Compile Include="Models\LzssFileItemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
