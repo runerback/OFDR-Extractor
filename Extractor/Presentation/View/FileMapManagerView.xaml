@@ -53,7 +53,7 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsThreeState="True" IsChecked="{Binding TreeNode.IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ContentControl Content="{Binding TreeNode.NodeType, Mode=OneWay}" />
-                <controls:DraggableGizmo IsChecked="{Binding TreeNode.IsSelected, Mode=OneWay}">
+                <controls:DraggableGizmo IsChecked="{Binding IsChecked, Mode=OneWay}">
                     <TextBlock Text="{Binding Name, Mode=OneWay}" />
                 </controls:DraggableGizmo>
                 <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0" />
@@ -64,7 +64,7 @@
             <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding TreeNode.IsSelected, Mode=TwoWay}" />
                 <ContentControl Content="{Binding TreeNode.NodeType, Mode=OneWay}" />
-                <controls:DraggableGizmo IsChecked="{Binding TreeNode.IsSelected, Mode=OneWay}">
+                <controls:DraggableGizmo IsChecked="{Binding IsChecked, Mode=OneWay}">
                     <StackPanel Orientation="Horizontal" Margin="0">
                         <TextBlock Text="{Binding Name, Mode=OneWay}" />
                         <TextBlock Text="{Binding FormattedSize, Mode=OneWay}" />

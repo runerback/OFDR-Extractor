@@ -85,5 +85,20 @@ namespace Extractor.Models
 		{
 			return this.OutputName;
 		}
+
+		public override bool CanMoveTo(FileDataBase destination)
+		{
+			if (destination.TreeNode.NodeType == TreeNodeType.File)
+			{
+				if (destination.ParentFolder == this.ParentFolder)
+					return false;
+			}
+			else if (destination.TreeNode.NodeType == TreeNodeType.Folder)
+			{
+				if (destination as FolderData == this.ParentFolder)
+					return false;
+			}
+			return true;
+		}
 	}
 }

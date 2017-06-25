@@ -91,6 +91,7 @@
     <Compile Include="Controls\StatusPresenter.cs" />
     <Compile Include="Extensions\CountExtension.cs" />
     <Compile Include="Extensions\ForeachExtension.cs" />
+    <Compile Include="Extensions\IndexOfExtention.cs" />
     <Compile Include="Extensions\VisualExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -134,6 +135,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DragDrop\DragDropDataObject.cs" />
     <Compile Include="Models\Files\FileData.cs" />
     <Compile Include="Models\Files\FileDataBase.cs" />
     <Compile Include="Models\Files\FolderData.cs" />
