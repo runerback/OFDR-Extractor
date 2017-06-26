@@ -1,2 +1,4 @@
 
-UnitTest/UnitTest.csproj.user
+**/*.csproj.user
+**/bin
+**/obj
