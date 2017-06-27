@@ -8,21 +8,40 @@ namespace Extractor.Models
 {
 	public class FileData : FileDataBase
 	{
-		public FileData(LZSS.FileItem lzssFileInfo)
+	//	public FileData(LZSS.FileItem lzssFileInfo)
+	//	{
+	//		if (lzssFileInfo == null)
+	//		{
+	//			throw new ArgumentNullException("lzssFileInfo");
+	//		}
+	//		if (lzssFileInfo.Size == 0)
+	//		{
+	//			throw new ArgumentException("lzssFileInfo. seems folder");
+	//		}
+	//		this.name = lzssFileInfo.Name;
+	//		this.size = lzssFileInfo.Size;
+	//		this.formattedSize = formatSize(lzssFileInfo.Size);
+	//		this.outputName = string.Format("{0}{1}", lzssFileInfo.Name, lzssFileInfo.Index < 1 ? "" : lzssFileInfo.Index.ToString());
+	//		this.index = lzssFileInfo.Index;
+	//		this.treeNode = new TreeNodeModel(this);
+	//	}
+
+		public FileData(IFileInfo outerFile)
 		{
-			if (lzssFileInfo == null)
+			if (outerFile == null)
 			{
-				throw new ArgumentNullException("lzssFileInfo");
+				throw new ArgumentNullException("outerFile");
 			}
-			if (lzssFileInfo.Size == 0)
+			if (outerFile.Size == 0)
 			{
 				throw new ArgumentException("lzssFileInfo. seems folder");
 			}
-			this.name = lzssFileInfo.Name;
-			this.size = lzssFileInfo.Size;
-			this.formattedSize = formatSize(lzssFileInfo.Size);
-			this.outputName = string.Format("{0}{1}", lzssFileInfo.Name, lzssFileInfo.Index < 1 ? "" : lzssFileInfo.Index.ToString());
-			//this.index = string.Format(" - {0}", lzssFileInfo.Index + 1);
+			this.name = outerFile.Name;
+			this.size = outerFile.Size;
+			this.formattedSize = formatSize(outerFile.Size);
+			int index = outerFile.Index;
+			this.outputName = string.Format("{0}{1}", outerFile.Name, index < 1 ? "" : index.ToString());
+			this.index = index;
 			this.treeNode = new TreeNodeModel(this);
 		}
 
@@ -32,11 +51,11 @@ namespace Extractor.Models
 			get { return this.size; }
 		}
 
-		//private string index;
-		//public string Index
-		//{
-		//	get { return this.index; }
-		//}
+		private int index;
+		public int Index
+		{
+			get { return this.index; }
+		}
 
 		private string formattedSize;
 		public string FormattedSize
@@ -76,29 +95,51 @@ namespace Extractor.Models
 		}
 
 		private string outputName;
+		/// <summary>
+		/// output file name with Index which is DAT.exe actually output filename
+		/// </summary>
 		public string OutputName
 		{
 			get { return this.outputName; }
 		}
 
+		/// <summary>
+		/// output file fullname without Index
+		/// </summary>
+		public string OutputFullName
+		{
+			get
+			{
+				string outputFolder = this.getOutputFolderPath();
+				return string.Concat(outputFolder, this.name);
+			}
+		}
+
+		private string getOutputFolderPath()
+		{
+			if (this.ParentFolder == null) return null;
+
+			Stack<string> upperFolders = new Stack<string>();
+			var folder = this.ParentFolder;
+			while (folder != null)
+			{
+				upperFolders.Push(folder.Name);
+				folder = folder.ParentFolder;
+			}
+
+			if (upperFolders.Count == 0) return null;
+
+			StringBuilder folderPathBuilder = new StringBuilder("/");
+			while (upperFolders.Count > 0)
+			{
+				folderPathBuilder.AppendFormat("{0}/", upperFolders.Pop());
+			}
+			return folderPathBuilder.ToString();
+		}
+
 		public override string ToString()
 		{
 			return this.OutputName;
-		}
-
-		public override bool CanMoveTo(FileDataBase destination)
-		{
-			if (destination.TreeNode.NodeType == TreeNodeType.File)
-			{
-				if (destination.ParentFolder == this.ParentFolder)
-					return false;
-			}
-			else if (destination.TreeNode.NodeType == TreeNodeType.Folder)
-			{
-				if (destination as FolderData == this.ParentFolder)
-					return false;
-			}
-			return true;
 		}
 	}
 }

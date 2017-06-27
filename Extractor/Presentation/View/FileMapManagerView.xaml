@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:models="clr-namespace:Extractor.Models"
              xmlns:controls="clr-namespace:Extractor.Controls"
+             xmlns:extensions="clr-namespace:Extractor.Extensions"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -56,7 +57,8 @@
                 <controls:DraggableGizmo IsChecked="{Binding IsChecked, Mode=OneWay}">
                     <TextBlock Text="{Binding Name, Mode=OneWay}" />
                 </controls:DraggableGizmo>
-                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0" />
+                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0"
+                              extensions:IsVisibleExtension.Visible="{Binding IsChecked, Mode=OneWay}" />
             </StackPanel>
         </HierarchicalDataTemplate>
         
@@ -70,7 +72,8 @@
                         <TextBlock Text="{Binding FormattedSize, Mode=OneWay}" />
                     </StackPanel>
                 </controls:DraggableGizmo>
-                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0" />
+                <ContentControl Content="{Binding TreeNode.State, Mode=OneWay}" Margin="6, 0"
+                                extensions:IsVisibleExtension.Visible="{Binding IsChecked, Mode=OneWay}"/>
             </StackPanel>
         </DataTemplate>
 

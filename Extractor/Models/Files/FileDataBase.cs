@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Extractor.Models
 {
-	public abstract class FileDataBase : Common.ViewModelBase
+	public class FileDataBase : Common.ViewModelBase
 	{
 		protected FileDataBase() { }
 
@@ -33,7 +33,26 @@ namespace Extractor.Models
 			}
 		}
 
-		public abstract bool CanMoveTo(FileDataBase destination);
+		public virtual bool CanMoveTo(FileDataBase destination)
+		{
+			if (destination.TreeNode.NodeType == TreeNodeType.File)
+			{
+				if (destination.ParentFolder == this.ParentFolder)
+					return false;
+			}
+			else if (destination.TreeNode.NodeType == TreeNodeType.Folder)
+			{
+				FileDataBase ancestor = destination;
+				while ((ancestor = ancestor.ParentFolder) != null)
+				{
+					if (ancestor == this)
+						return false;
+				}
+				if (destination == this.ParentFolder)
+					return false;
+			}
+			return true;
+		}
 
 		public virtual void MoveTo(FileDataBase destination)
 		{

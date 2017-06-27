@@ -54,6 +54,13 @@ namespace UnitTest.Business
 				rootFolder = Extractor.Business.LZSSFileMapParser.Parse(this.lzssFileMap);
 			});
 			Assert.NotNull(rootFolder);
+			this.rootFolder = rootFolder;
+		}
+
+		private Extractor.Models.FolderData rootFolder;
+		public Extractor.Models.FolderData RootFolder
+		{
+			get { return this.rootFolder; }
 		}
 	}
 }

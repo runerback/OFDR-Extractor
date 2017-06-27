@@ -137,6 +137,8 @@ namespace Extractor.Business
 					throw parseNameSizeTask.Exception;
 				}
 
+				if (parseNameSizeTask.IsCanceled) { return null; }
+
 				var items = parseNameSizeTask.Result;
 				if (items == null || items.Count == 0) { return null; }
 
@@ -262,6 +264,8 @@ namespace Extractor.Business
 				{
 					throw parseIndexTask.Exception;
 				}
+
+				if (parseIndexTask.IsCanceled) { return null; }
 
 				var lzssFiles = parseIndexTask.Result;
 				if (lzssFiles == null || lzssFiles.Count == 0) { return null; }

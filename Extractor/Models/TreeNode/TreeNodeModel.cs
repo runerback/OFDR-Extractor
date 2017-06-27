@@ -38,7 +38,7 @@ namespace Extractor.Models
 			{
 				if (this.isSelected != value)
 				{
-					if (this.controlIsSelectedStateFromBackend)
+					if (this.setIsSelectedStateFromBackend)
 					{
 						this.isSelected = value;
 						this.NotifyPropertyChanged("IsSelected");
@@ -55,19 +55,23 @@ namespace Extractor.Models
 						}
 					}
 					this.fileData.NotifyPropertyChangedAsync("IsChecked");
-					this.onSelectionStateChanged(value);
+					if (!this.isPassingToUpwards)
+					{
+						this.onIsSelectedStateChanged(value);
+					}
 				}
 			}
 		}
 
-		private bool controlIsSelectedStateFromBackend = false;
+		private bool setIsSelectedStateFromBackend = false;
 		private void setIsSelected(bool? value)
 		{
-			this.controlIsSelectedStateFromBackend = true;
+			this.setIsSelectedStateFromBackend = true;
 			this.IsSelected = value;
-			this.controlIsSelectedStateFromBackend = false;
+			this.setIsSelectedStateFromBackend = false;
 		}
 
+		private bool isPassingToUpwards = false;
 
 		private TreeNodeType nodeType;
 		public TreeNodeType NodeType
@@ -95,7 +99,7 @@ namespace Extractor.Models
 			get { return this.fileData; }
 		}
 
-		private void onSelectionStateChanged(bool? value)
+		private void onIsSelectedStateChanged(bool? value)
 		{
 			if (this.nodeType == TreeNodeType.Folder)
 			{
@@ -123,12 +127,14 @@ namespace Extractor.Models
 			{
 				int selectedCount = parentFolder.Source.Count(item =>
 					!item.TreeNode.IsSelected.HasValue || item.TreeNode.IsSelected == true);
+				parentFolder.TreeNode.isPassingToUpwards = true;
 				if (selectedCount == 0)
 					parentFolder.TreeNode.setIsSelected(false);
 				else if (selectedCount == parentFolder.Source.Count)
 					parentFolder.TreeNode.setIsSelected(true);
 				else
 					parentFolder.TreeNode.setIsSelected(null);
+				parentFolder.TreeNode.isPassingToUpwards = false;
 
 				parentFolder = parentFolder.ParentFolder;
 			}
