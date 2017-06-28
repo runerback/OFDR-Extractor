@@ -16,7 +16,7 @@ namespace UnitTest.Business
 		{
 			var parser = new LZSSFileMapParserTest();
 			parser.Parse();
-			Assert.DoesNotThrow(() => Extractor.Business.IOFilesManager.Export(LZSSFileMapParserTest.RootFolder, this.outputFileName));
+			Assert.DoesNotThrow(() => Extractor.Business.IOFilesManager.Export(parser.RootFolder, this.outputFileName));
 		}
 
 		[Test]
