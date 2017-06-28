@@ -25,13 +25,49 @@ namespace Extractor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("/")]
-        public string OFDRRoot {
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources")]
+        public string OFDRRootFolder {
             get {
-                return ((string)(this["OFDRRoot"]));
+                return ((string)(this["OFDRRootFolder"]));
             }
             set {
-                this["OFDRRoot"] = value;
+                this["OFDRRootFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources\\dat.exe")]
+        public string DATFilePath {
+            get {
+                return ((string)(this["DATFilePath"]));
+            }
+            set {
+                this["DATFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources\\unpacked")]
+        public string OutputFolder {
+            get {
+                return ((string)(this["OutputFolder"]));
+            }
+            set {
+                this["OutputFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int MaxUnpackingParallelismCount {
+            get {
+                return ((int)(this["MaxUnpackingParallelismCount"]));
+            }
+            set {
+                this["MaxUnpackingParallelismCount"] = value;
             }
         }
     }

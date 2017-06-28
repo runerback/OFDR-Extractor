@@ -26,11 +26,17 @@ namespace UnitTest.Business
 		private void callDAT()
 		{
 			this.blocker = new AutoResetEvent(false);
-            Assert.Greater(Extractor.Business.DATManager.Call(), -1);
-			this.blocker.WaitOne();
-			this.blocker.Close();
-			this.blocker.Dispose();
-			this.blocker = null;
+			try
+			{
+				Assert.Greater(Extractor.Business.DATManager.Call(), -1);
+			}
+			finally
+			{
+				this.blocker.WaitOne();
+				this.blocker.Close();
+				this.blocker.Dispose();
+				this.blocker = null;
+			}
 		}
 
         private void onDataReceived(int id, string data)
@@ -54,13 +60,13 @@ namespace UnitTest.Business
 				rootFolder = Extractor.Business.LZSSFileMapParser.Parse(this.lzssFileMap);
 			});
 			Assert.NotNull(rootFolder);
-			this.rootFolder = rootFolder;
+			LZSSFileMapParserTest.rootFolder = rootFolder;
 		}
 
-		private Extractor.Models.FolderData rootFolder;
-		public Extractor.Models.FolderData RootFolder
+		private static Extractor.Models.FolderData rootFolder;
+		public static Extractor.Models.FolderData RootFolder
 		{
-			get { return this.rootFolder; }
+			get { return LZSSFileMapParserTest.rootFolder; }
 		}
 	}
 }
