@@ -2,17 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Extractor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="OFDRRootFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Resources</Value>
-    </Setting>
-    <Setting Name="DATFilePath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Resources\dat.exe</Value>
-    </Setting>
-    <Setting Name="OutputFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">.\Resources\unpacked</Value>
-    </Setting>
-    <Setting Name="MaxUnpackingParallelismCount" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+    <Setting Name="OFDRRoot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

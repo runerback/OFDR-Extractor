@@ -25,49 +25,13 @@ namespace Extractor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources")]
-        public string OFDRRootFolder {
+        [global::System.Configuration.DefaultSettingValueAttribute("/")]
+        public string OFDRRoot {
             get {
-                return ((string)(this["OFDRRootFolder"]));
+                return ((string)(this["OFDRRoot"]));
             }
             set {
-                this["OFDRRootFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources\\dat.exe")]
-        public string DATFilePath {
-            get {
-                return ((string)(this["DATFilePath"]));
-            }
-            set {
-                this["DATFilePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(".\\Resources\\unpacked")]
-        public string OutputFolder {
-            get {
-                return ((string)(this["OutputFolder"]));
-            }
-            set {
-                this["OutputFolder"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int MaxUnpackingParallelismCount {
-            get {
-                return ((int)(this["MaxUnpackingParallelismCount"]));
-            }
-            set {
-                this["MaxUnpackingParallelismCount"] = value;
+                this["OFDRRoot"] = value;
             }
         }
     }

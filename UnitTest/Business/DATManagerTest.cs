@@ -22,61 +22,37 @@ namespace UnitTest.Business
         [Test]
 		public void CallWithoutParam()
 		{
-			try
-			{
-				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call(), -1);
-				this.blocker.WaitOne();
-			}
-			finally
-			{
-				this.releaseResources();
-			}
+            this.blocker.Reset();
+			Assert.Greater(Extractor.Business.DATManager.Call(), -1);
+			this.blocker.WaitOne();
+            this.releaseResources();
 		}
 
 		[Test]
 		public void CallWithFirstFileInfo()
         {
-			try
-			{
-				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("logo_sting_out.ambx_bn"), -1);
-				this.blocker.WaitOne();
-			}
-			finally
-			{
-				this.releaseResources();
-			}
+            this.blocker.Reset();
+            Assert.Greater(Extractor.Business.DATManager.Call("logo_sting_out.ambx_bn"), -1);
+			this.blocker.WaitOne();
+            this.releaseResources();
         }
 
 		[Test]
 		public void CallWithDeeperFileInfo()
         {
-			try
-			{
-				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("level.lub", "5"), -1);
-				this.blocker.WaitOne();
-			}
-			finally
-			{
-				this.releaseResources();
-			}
+            this.blocker.Reset();
+            Assert.Greater(Extractor.Business.DATManager.Call("level.lub", "5"), -1);
+			this.blocker.WaitOne();
+            this.releaseResources();
         }
 
         [Test]
         public void CallWithWrongFileInfo()
         {
-			try
-			{
-				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("file_does_not_exist.hora", "1"), -1);
-				this.blocker.WaitOne();
-			}
-			finally
-			{
-				this.releaseResources();
-			}
+            this.blocker.Reset();
+            Assert.Greater(Extractor.Business.DATManager.Call("file_does_not_exist.hora", "1"), -1);
+            this.blocker.WaitOne();
+            this.releaseResources();
         }
 
 		private void onDataReceived(int id, string data)

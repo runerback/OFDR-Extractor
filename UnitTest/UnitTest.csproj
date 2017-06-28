@@ -43,7 +43,6 @@
       <HintPath>D:\SOFTWARE\Code\NUnit\2.6.4\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,13 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\DATManagerTest.cs" />
-    <Compile Include="Business\FileUnpackingManagerTest.cs" />
     <Compile Include="Business\IOFilesManagerTest.cs" />
     <Compile Include="Business\LZSSFileMapParserTest.cs" />
     <Compile Include="Extensions\LinqExtensionTest.cs" />
     <Compile Include="Models\Files\FileDataTest.cs" />
     <Compile Include="Models\LzssFileItemTest.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
