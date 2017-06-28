@@ -69,8 +69,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Business\CodeTimeChecker.cs" />
+    <Compile Include="Business\ConfigManager.cs" />
     <Compile Include="Business\DATManager.cs" />
     <Compile Include="Business\ExceptionManager.cs" />
+    <Compile Include="Business\FileUnpackingManager.cs" />
+    <Compile Include="Business\IOFilesManager.cs" />
     <Compile Include="Business\LZSSFileMapParser.cs" />
     <Compile Include="Business\ReferenceComparer.cs" />
     <Compile Include="Business\StatusManager.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Extensions\CountExtension.cs" />
     <Compile Include="Extensions\ForeachExtension.cs" />
     <Compile Include="Extensions\IndexOfExtention.cs" />
+    <Compile Include="Extensions\IsVisibleExtension.cs" />
     <Compile Include="Extensions\VisualExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -139,6 +143,9 @@
     <Compile Include="Models\Files\FileData.cs" />
     <Compile Include="Models\Files\FileDataBase.cs" />
     <Compile Include="Models\Files\FolderData.cs" />
+    <Compile Include="Models\IFileInfo.cs" />
+    <Compile Include="Models\IOFiles\File.cs" />
+    <Compile Include="Models\IOFiles\Folder.cs" />
     <Compile Include="Models\TreeNode\TreeNodeModel.cs" />
     <Compile Include="Models\TreeNode\TreeNodeState.cs" />
     <Compile Include="Models\TreeNode\TreeNodeType.cs" />

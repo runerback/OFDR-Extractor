@@ -18,16 +18,16 @@ namespace Extractor.Models
 			this.treeNode = new TreeNodeModel(this);
 		}
 
-		private List<FileData> files;
-		public List<FileData> Files
-		{
-			get { return this.files; }
-		}
-
 		private List<FolderData> subFolders;
 		public List<FolderData> SubFolders
 		{
 			get { return this.subFolders; }
+		}
+
+		private List<FileData> files;
+		public List<FileData> Files
+		{
+			get { return this.files; }
 		}
 
 		private int level = 0;
@@ -51,8 +51,6 @@ namespace Extractor.Models
 				subFolder.ParentFolder = this;
 				subFolder.level = this.level + 1;
 
-				//this.source.Add(subFolder);
-				//should be ordered
 				int index = this.source.LastIndexOf(
 					item => item.TreeNode.NodeType == TreeNodeType.Folder);
 				if (index < 0)
@@ -136,19 +134,12 @@ namespace Extractor.Models
 
 		public override bool CanMoveTo(FileDataBase destination)
 		{
-			//moving parent folder into child folder is not handled.
 			if (destination.TreeNode.NodeType == TreeNodeType.File)
 			{
-				if (destination.ParentFolder == this ||
-					destination.ParentFolder == this.ParentFolder)
+				if (destination.ParentFolder == this)
 					return false;
 			}
-			else if (destination.TreeNode.NodeType == TreeNodeType.Folder)
-			{
-				if (destination as FolderData == this.ParentFolder)
-					return false;
-			}
-			return true;
+			return base.CanMoveTo(destination);
 		}
 	}
 }

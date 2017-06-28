@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Extractor.Models.LZSS
 {
-	public class FileItem
+	public class FileItem : IFileInfo
 	{
 		public string Name { get; set; }
 		public long Size { get; set; }

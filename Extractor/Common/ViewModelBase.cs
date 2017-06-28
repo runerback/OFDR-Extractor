@@ -27,10 +27,13 @@ namespace Extractor.Common
 
 		public void NotifyPropertyChangedAsync(string propertyName)
 		{
-			Application.Current.Dispatcher.BeginInvoke(
-				(Action<string>)this.NotifyPropertyChanged, 
-				System.Windows.Threading.DispatcherPriority.Render,
-				propertyName);
+			if (System.Windows.Application.Current != null)
+			{
+				Application.Current.Dispatcher.BeginInvoke(
+					(Action<string>)this.NotifyPropertyChanged,
+					System.Windows.Threading.DispatcherPriority.Render,
+					propertyName);
+			}
 		}
 	}
 }
