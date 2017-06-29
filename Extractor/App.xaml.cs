@@ -12,6 +12,17 @@ namespace Extractor
 	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			if (!Business.ConfigManager.CheckConfigurations())
+			{
+				Application.Current.Dispatcher.InvokeShutdown();
+				return;
+			}
+
+			new MainWindow().Show();
+		}
+
 		private void onDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 		{
 			Business.ExceptionManager.ShowPopup(e.Exception);

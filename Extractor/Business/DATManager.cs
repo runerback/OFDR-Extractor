@@ -18,11 +18,8 @@ namespace Extractor.Business
 		{
 			try
 			{
-				FileInfo fileInfo = new FileInfo("Resources/dat.exe");
-				if (!fileInfo.Exists) { return -1; }
-
 				var processInfo = new ProcessStartInfo(
-					fileInfo.FullName,
+					ConfigManager.DATFilePath,
 					args == null ? null : string.Join(" ", args))
 				{
 					CreateNoWindow = true,
@@ -32,7 +29,7 @@ namespace Extractor.Business
 					RedirectStandardOutput = true,
 					UseShellExecute = false,
 					WindowStyle = ProcessWindowStyle.Hidden,
-					WorkingDirectory = fileInfo.DirectoryName
+					WorkingDirectory = ConfigManager.OFDRRootFolder
 				};
 
 				Process process = new Process()

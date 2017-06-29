@@ -129,10 +129,10 @@ namespace Extractor.Models
 
 			if (upperFolders.Count == 0) return null;
 
-			StringBuilder folderPathBuilder = new StringBuilder("/");
+			StringBuilder folderPathBuilder = new StringBuilder();
 			while (upperFolders.Count > 0)
 			{
-				folderPathBuilder.AppendFormat("{0}/", upperFolders.Pop());
+				folderPathBuilder.AppendFormat("{0}\\", upperFolders.Pop());
 			}
 			return folderPathBuilder.ToString();
 		}

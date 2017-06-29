@@ -37,7 +37,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +103,7 @@
     <Compile Include="Extensions\ForeachExtension.cs" />
     <Compile Include="Extensions\IndexOfExtention.cs" />
     <Compile Include="Extensions\IsVisibleExtension.cs" />
+    <Compile Include="Extensions\RandomExtension.cs" />
     <Compile Include="Extensions\VisualExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -139,11 +147,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Interfaces\IUIModel.cs" />
+    <Compile Include="Models\Interfaces\IUIModel%28T%29.cs" />
+    <Compile Include="Models\Setting\AppSetting.cs" />
     <Compile Include="Models\DragDrop\DragDropDataObject.cs" />
     <Compile Include="Models\Files\FileData.cs" />
     <Compile Include="Models\Files\FileDataBase.cs" />
     <Compile Include="Models\Files\FolderData.cs" />
-    <Compile Include="Models\IFileInfo.cs" />
+    <Compile Include="Models\Interfaces\IFileInfo.cs" />
     <Compile Include="Models\IOFiles\File.cs" />
     <Compile Include="Models\IOFiles\Folder.cs" />
     <Compile Include="Models\TreeNode\TreeNodeModel.cs" />
@@ -151,6 +162,7 @@
     <Compile Include="Models\TreeNode\TreeNodeType.cs" />
     <Compile Include="Models\LZSS\FileItem.cs" />
     <Compile Include="Models\OperationStates.cs" />
+    <Compile Include="Models\Setting\UserSetting.cs" />
     <Compile Include="Presentation\Controller\PageController.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\OperationsViewModel.cs" />
@@ -178,11 +190,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="..\FakeDat\bin\Debug\Resources\list">
-      <Link>Resources\list</Link>
+    <None Include="..\FakeDat\bin\Debug\Resources\win_000.nfs">
+      <Link>Resources\win_000.nfs</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
