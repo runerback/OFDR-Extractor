@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Extractor.Shell.Framework"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:Extractor.Shell.Controls"
+             xmlns:navigation="clr-namespace:Extractor.Shell.Navigation"
+             Margin="6">
+    <UserControl.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="26" />
+            <RowDefinition />
+            <RowDefinition Height="21" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Name="MenuBar">
+            <navigation:MenuBar Margin="0" />
+        </Grid>
+
+        <Grid Grid.Row="1" Name="ToolBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" Name="NavitaorBar" VerticalAlignment="Center">
+                <navigation:NavigatorBar />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Name="TabContainer">
+            
+        </Grid>
+        
+        <Grid Grid.Row="3" Name="PageContainer">
+            <navigation:PageContainer />
+        </Grid>
+        
+        <Grid Grid.Row="4" Name="StatusBar">
+            <controls:StatusPresenter DataContext="{Binding StatusBarDataContext, Mode=OneWay}" />
+        </Grid>
+    </Grid>
+</UserControl>

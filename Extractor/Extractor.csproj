@@ -63,10 +63,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\OperationControlBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,101 +80,14 @@
     <Compile Include="Business\LZSSFileMapParser.cs" />
     <Compile Include="Business\ReferenceComparer.cs" />
     <Compile Include="Business\StatusManager.cs" />
-    <Compile Include="Common\AutoInvokeObservableCollection.cs" />
-    <Compile Include="Common\DelegateCommand.cs" />
-    <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\ViewModelBase.cs" />
-    <Compile Include="Controls\DraggableGizmo.cs" />
-    <Compile Include="Controls\FileMapPresenter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\FolderDataPersenter.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\OperationControlBox.xaml.cs">
-      <DependentUpon>OperationControlBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\StatusPresenter.cs" />
-    <Compile Include="Extensions\CountExtension.cs" />
-    <Compile Include="Extensions\ForeachExtension.cs" />
-    <Compile Include="Extensions\IndexOfExtention.cs" />
-    <Compile Include="Extensions\IsVisibleExtension.cs" />
-    <Compile Include="Extensions\RandomExtension.cs" />
-    <Compile Include="Extensions\VisualExtension.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Presentation\View\FileMapManagerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\View\OperationsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\View\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\ButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\CheckBoxTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Colors.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\CommonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Images.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\ProgressBarTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\ToggleButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Interfaces\IUIModel.cs" />
-    <Compile Include="Models\Interfaces\IUIModel%28T%29.cs" />
-    <Compile Include="Models\Setting\AppSetting.cs" />
-    <Compile Include="Models\DragDrop\DragDropDataObject.cs" />
-    <Compile Include="Models\Files\FileData.cs" />
-    <Compile Include="Models\Files\FileDataBase.cs" />
-    <Compile Include="Models\Files\FolderData.cs" />
-    <Compile Include="Models\Interfaces\IFileInfo.cs" />
-    <Compile Include="Models\IOFiles\File.cs" />
-    <Compile Include="Models\IOFiles\Folder.cs" />
-    <Compile Include="Models\TreeNode\TreeNodeModel.cs" />
-    <Compile Include="Models\TreeNode\TreeNodeState.cs" />
-    <Compile Include="Models\TreeNode\TreeNodeType.cs" />
-    <Compile Include="Models\LZSS\FileItem.cs" />
-    <Compile Include="Models\OperationStates.cs" />
-    <Compile Include="Models\Setting\UserSetting.cs" />
-    <Compile Include="Presentation\Controller\PageController.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
-    <Compile Include="Presentation\ViewModel\OperationsViewModel.cs" />
-    <Compile Include="Presentation\View\FileMapManagerView.xaml.cs">
-      <DependentUpon>FileMapManagerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\View\OperationsView.xaml.cs">
-      <DependentUpon>OperationsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Presentation\View\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -197,10 +106,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="..\FakeDat\bin\Debug\Resources\win_000.nfs">
-      <Link>Resources\win_000.nfs</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -210,27 +115,29 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_pause.png" />
-    <Resource Include="Resources\Images\btn_start.png" />
-    <Resource Include="Resources\Images\btn_stop.png" />
-    <Resource Include="Resources\Images\btn_stopped.png" />
-    <Resource Include="Resources\Images\state_error.png" />
-    <Resource Include="Resources\Images\state_processing.png" />
-    <Resource Include="Resources\Images\state_ready.png" />
-    <Resource Include="Resources\Images\state_standby.png" />
-    <Resource Include="Resources\Images\type_file.png" />
-    <Resource Include="Resources\Images\type_folder.png" />
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{a84f9cf5-b766-460c-81cf-04df65c62930}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{3934ebbb-0d1c-4a44-aa80-178ecb84acf8}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extension\Extension.csproj">
+      <Project>{18e79330-cf9f-4089-af3d-c87f8f571006}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shell\Shell.csproj">
+      <Project>{83313bbd-15ba-4476-9618-dee3fb6cc914}</Project>
+      <Name>Shell</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_resume.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\FakeDat\bin\Debug\dat.exe">
-      <Link>Resources\dat.exe</Link>
+    <None Include="AppData\modulesets.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

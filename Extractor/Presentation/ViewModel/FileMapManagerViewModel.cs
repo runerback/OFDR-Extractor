@@ -46,15 +46,15 @@ namespace Extractor.Presentation.ViewModel
 
 		private bool isRootFolderGenerated = false;
 
-		private Models.FolderData rootFolder = null;
-		public Models.FolderData Root
+		private Data.FolderData rootFolder = null;
+		public Data.FolderData Root
 		{
 			get { return this.rootFolder; }
 		}
 
-		private Common.AutoInvokeObservableCollection<Models.FolderData> rootSource = 
-			new Common.AutoInvokeObservableCollection<Models.FolderData>();
-		public Common.AutoInvokeObservableCollection<Models.FolderData> RootSource
+		private Common.AutoInvokeObservableCollection<Data.FolderData> rootSource =
+			new Common.AutoInvokeObservableCollection<Data.FolderData>();
+		public Common.AutoInvokeObservableCollection<Data.FolderData> RootSource
 		{
 			get { return this.rootSource; }
 		}
@@ -64,7 +64,7 @@ namespace Extractor.Presentation.ViewModel
 			try
 			{
 				this.rootSource.Clear();
-				Models.FolderData root = null;
+				Data.FolderData root = null;
 				if (!string.IsNullOrWhiteSpace(data))
 				{
 					root = Business.LZSSFileMapParser.Parse(data);
@@ -76,14 +76,14 @@ namespace Extractor.Presentation.ViewModel
 				}
 				else
 				{
-					Models.FolderData fakeFolder = new Models.FolderData("test");
-					fakeFolder.Add(new Models.FileData(new Models.LZSS.FileItem()
+					Data.FolderData fakeFolder = new Data.FolderData("test");
+					fakeFolder.Add(new Data.FileData(new Data.LZSSFileItem()
 					{
 						Name = "test.txt",
 						Index = 0,
 						Size = 100
 					}));
-					fakeFolder.Add(new Models.FileData(new Models.LZSS.FileItem()
+					fakeFolder.Add(new Data.FileData(new Data.LZSSFileItem()
 					{
 						Name = "test.txt",
 						Index = 1,

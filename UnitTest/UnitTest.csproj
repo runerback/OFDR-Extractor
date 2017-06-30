@@ -8,8 +8,8 @@
     <ProjectGuid>{4B55EDBD-B18A-42A0-B0CD-BFB1242DB6FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTest</RootNamespace>
-    <AssemblyName>UnitTest</AssemblyName>
+    <RootNamespace>Extractor.UnitTest</RootNamespace>
+    <AssemblyName>OFDRExtractorUnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -57,12 +57,24 @@
     <Compile Include="Business\IOFilesManagerTest.cs" />
     <Compile Include="Business\LZSSFileMapParserTest.cs" />
     <Compile Include="Extensions\LinqExtensionTest.cs" />
-    <Compile Include="Models\Files\FileDataTest.cs" />
+    <Compile Include="Models\FileDataTest.cs" />
     <Compile Include="Models\LzssFileItemTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{a84f9cf5-b766-460c-81cf-04df65c62930}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{3934ebbb-0d1c-4a44-aa80-178ecb84acf8}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extension\Extension.csproj">
+      <Project>{18e79330-cf9f-4089-af3d-c87f8f571006}</Project>
+      <Name>Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extractor\Extractor.csproj">
       <Project>{42291D82-8EDB-4CED-A39E-3DAC96313F47}</Project>
       <Name>Extractor</Name>

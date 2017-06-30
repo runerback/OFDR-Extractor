@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using System.Collections;
 
-namespace UnitTest.Extensions
+namespace Extractor.UnitTest.Extensions
 {
 	[TestFixture]
 	public class LinqExtensionTest

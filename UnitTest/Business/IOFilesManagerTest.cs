@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UnitTest.Business
+namespace Extractor.UnitTest.Business
 {
 	[TestFixture]
 	public class IOFilesManagerTest

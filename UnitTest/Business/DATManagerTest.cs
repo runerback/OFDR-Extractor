@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using System.Threading;
 
-namespace UnitTest.Business
+namespace Extractor.UnitTest.Business
 {
 	[TestFixture]
 	public class DATManagerTest

@@ -16,15 +16,15 @@ namespace Extractor.Business
 			Business.DATManager.Exited += onDATExited;
 		}
 
-		public static void Unpack(Models.FileDataBase fileData)
+		public static void Unpack(Data.FileDataBase fileData)
 		{
 			if (fileData != null)
 			{
-				if (fileData.TreeNode.NodeType == Models.TreeNodeType.File)
+				if (fileData.TreeNode.NodeType == Data.TreeNodeType.File)
 				{
 					Task.Factory.StartNew(unpackFile, fileData);
 				}
-				else if (fileData.TreeNode.NodeType == Models.TreeNodeType.Folder)
+				else if (fileData.TreeNode.NodeType == Data.TreeNodeType.Folder)
 				{
 					Task.Factory.StartNew(unpackFile, fileData);
 				}
@@ -34,20 +34,20 @@ namespace Extractor.Business
 				}
 			}
 		}
-		
-		private static ConcurrentDictionary<int, Models.FileData> processMap = new ConcurrentDictionary<int, Models.FileData>();
+
+		private static ConcurrentDictionary<int, Data.FileData> processMap = new ConcurrentDictionary<int, Data.FileData>();
 		
 		private static void unpackFile(object obj)
 		{
-			var file = obj as Models.FileData;
-			file.TreeNode.State = Models.TreeNodeState.Processing;
+			var file = obj as Data.FileData;
+			file.TreeNode.State = Data.TreeNodeState.Processing;
 			int processID = Business.DATManager.Call(file.Name, file.Index.ToString());
 			processMap.TryAdd(processID, file);
 		}
 
 		private static void unpackFolder(object obj)
 		{
-			var folder = obj as Models.FolderData;
+			var folder = obj as Data.FolderData;
 			var files = folder.Files
 				.Where(file => file.IsChecked)
 				.ToList();
@@ -56,19 +56,19 @@ namespace Extractor.Business
 
 		private static void onDATExited(int processID)
 		{
-			Models.FileData file;
+			Data.FileData file;
 			if (processMap.TryRemove(processID, out file))
 			{
 				moveToTargetFolder(file);
 			}
 			else
 			{
-				file.TreeNode.State = Models.TreeNodeState.Error;
+				file.TreeNode.State = Data.TreeNodeState.Error;
 			}
 			raiseCompleted(file);
 		}
 
-		private static void moveToTargetFolder(Models.FileData file)
+		private static void moveToTargetFolder(Data.FileData file)
 		{
 			try
 			{
@@ -76,7 +76,7 @@ namespace Extractor.Business
 				if (!unpackedFile.Exists)
 				{
 					Console.WriteLine("cannot unpack file: \"{0}\"", file.Name);
-					file.TreeNode.State = Models.TreeNodeState.Error;
+					file.TreeNode.State = Data.TreeNodeState.Error;
 					return;
 				}
 				Console.WriteLine("file unpacked: \"{0}\"", file.Name);
@@ -89,17 +89,17 @@ namespace Extractor.Business
 				unpackedFile.MoveTo(targetFile.FullName);
 				Console.WriteLine("file moved to: \"{0}\"", targetFile.FullName);
 
-				file.TreeNode.State = Models.TreeNodeState.Ready;
+				file.TreeNode.State = Data.TreeNodeState.Ready;
 			}
 			catch
 			{
-				file.TreeNode.State = Models.TreeNodeState.Error;
+				file.TreeNode.State = Data.TreeNodeState.Error;
 				throw;
 			}
 		}
 
 		public static event EventHandler Completed;
-		private static void raiseCompleted(Models.FileData file)
+		private static void raiseCompleted(Data.FileData file)
 		{
 			if (Completed != null)
 			{

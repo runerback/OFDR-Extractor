@@ -14,13 +14,29 @@ namespace Extractor
 	{
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			if (!Business.ConfigManager.CheckConfigurations())
+			this.DispatcherUnhandledException += this.onDispatcherUnhandledException;
+			try
 			{
-				Application.Current.Dispatcher.InvokeShutdown();
-				return;
-			}
+				var v = new MainWindow();
+				v.Show();
+				
+				if (!Business.ConfigManager.CheckConfigurations())
+				{
+					Application.Current.Dispatcher.InvokeShutdown();
+					return;
+				}
 
-			new MainWindow().Show();
+				Shell.Business.ModulesManager.Initialize();
+
+				v.Content = new Shell.Framework()
+				{
+					DataContext = new Presentation.ViewModel.FrameworkViewModel()
+				};
+			}
+			catch
+			{
+				throw;
+			}
 		}
 
 		private void onDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

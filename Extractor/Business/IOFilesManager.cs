@@ -10,11 +10,11 @@ namespace Extractor.Business
 {
 	public static class IOFilesManager
 	{
-		public static void Export(Models.FolderData root, string path)
+		public static void Export(Data.FolderData root, string path)
 		{
 			try
 			{
-				Models.IOFiles.Folder outerRoot = toOuter(root);
+				Data.IOFolder outerRoot = toOuter(root);
 				if (outerRoot == null) return;
 				if (string.IsNullOrWhiteSpace(path)) return;
 
@@ -32,7 +32,7 @@ namespace Extractor.Business
 			}
 		}
 
-		public static Models.FolderData Import(string path)
+		public static Data.FolderData Import(string path)
 		{
 			try
 			{
@@ -47,7 +47,7 @@ namespace Extractor.Business
 					}
 				}
 
-				return toInner(data as Models.IOFiles.Folder);
+				return toInner(data as Data.IOFolder);
 			}
 			catch
 			{
@@ -89,16 +89,16 @@ namespace Extractor.Business
 
 		#region convert
 
-		private static Models.FileData toInner(Models.IOFiles.File outer)
+		private static Data.FileData toInner(Data.IOFile outer)
 		{
 			if (outer == null) return null;
-			return new Models.FileData(outer);
+			return new Data.FileData(outer);
 		}
 
-		private static Models.IOFiles.File toOuter(Models.FileData inner)
+		private static Data.IOFile toOuter(Data.FileData inner)
 		{
 			if (inner == null) return null;
-			return new Models.IOFiles.File()
+			return new Data.IOFile()
 			{
 				Name = inner.Name,
 				Size = inner.Size,
@@ -106,11 +106,11 @@ namespace Extractor.Business
 			};
 		}
 
-		private static Models.FolderData toInner(Models.IOFiles.Folder outer)
+		private static Data.FolderData toInner(Data.IOFolder outer)
 		{
 			if (outer == null) return null;
 
-			var innerFolder = new Models.FolderData(outer.Name);
+			var innerFolder = new Data.FolderData(outer.Name);
 			if (outer.ShouldSerializeSubFolders())
 			{
 				foreach (var subFolder in outer.SubFolders)
@@ -132,14 +132,14 @@ namespace Extractor.Business
 			return innerFolder;
 		}
 
-		private static Models.IOFiles.Folder toOuter(Models.FolderData inner)
+		private static Data.IOFolder toOuter(Data.FolderData inner)
 		{
 			if (inner == null) return null;
 
-			var outerFolder = new Models.IOFiles.Folder() { Name = inner.Name };
+			var outerFolder = new Data.IOFolder() { Name = inner.Name };
 			if (inner.SubFolders.Count > 0)
 			{
-				outerFolder.SubFolders = new List<Models.IOFiles.Folder>();
+				outerFolder.SubFolders = new List<Data.IOFolder>();
 				foreach (var subFolder in inner.SubFolders)
 				{
 					var outer = toOuter(subFolder);
@@ -149,7 +149,7 @@ namespace Extractor.Business
 			}
 			if (inner.Files.Count > 0)
 			{
-				outerFolder.Files = new List<Models.IOFiles.File>();
+				outerFolder.Files = new List<Data.IOFile>();
 				foreach (var file in inner.Files)
 				{
 					var outer = toOuter(file);
@@ -165,7 +165,7 @@ namespace Extractor.Business
 		#region serialize
 
 		private static Lazy<XmlSerializer> serializer = new Lazy<XmlSerializer>(
-			() => new XmlSerializer(typeof(Models.IOFiles.Folder)),
+			() => new XmlSerializer(typeof(Data.IOFolder)),
 			false);
 
 		private static XmlWriter createWriter(Stream output)

@@ -11,14 +11,14 @@ namespace Extractor.Business
 {
 	public static class LZSSFileMapParser
 	{
-		public static Models.FolderData Parse(string fileMap)
+		public static Data.FolderData Parse(string fileMap)
 		{
 			try
 			{
 				return
-					Task.Factory.StartNew<IList<Models.LZSS.FileItem>>(parseNameSize, fileMap)
-					.ContinueWith<IList<Models.LZSS.FileItem>>(parseIndex, TaskContinuationOptions.NotOnFaulted)
-					.ContinueWith<Models.FolderData>(convert, TaskContinuationOptions.NotOnFaulted)
+					Task.Factory.StartNew<IList<Data.LZSSFileItem>>(parseNameSize, fileMap)
+					.ContinueWith<IList<Data.LZSSFileItem>>(parseIndex, TaskContinuationOptions.NotOnFaulted)
+					.ContinueWith<Data.FolderData>(convert, TaskContinuationOptions.NotOnFaulted)
 					.Result;
 			}
 			catch
@@ -34,7 +34,7 @@ namespace Extractor.Business
 
 		private static readonly string parserToken = @"(?<name>(\w+\.)*\w+|\w+\.\w+)\s+(?<size>\d+)";
 
-		private static IList<Models.LZSS.FileItem> parseNameSize(object fileMapObj)
+		private static IList<Data.LZSSFileItem> parseNameSize(object fileMapObj)
 		{
 			var checker = Business.CodeTimeChecker.New;
 			Business.StatusManager.Instance.UpdateProgress(0.3);
@@ -47,7 +47,7 @@ namespace Extractor.Business
 					return null;
 				}
 
-				var items = new List<Models.LZSS.FileItem>();
+				var items = new List<Data.LZSSFileItem>();
 
 				Regex parser = new Regex(parserToken);
 				var matches = parser.Matches(fileMap);
@@ -56,7 +56,7 @@ namespace Extractor.Business
 					long size;
 					if (long.TryParse(match.Groups["size"].Value, out size))
 					{
-						var item = new Models.LZSS.FileItem();
+						var item = new Data.LZSSFileItem();
 						item.Name = match.Groups["name"].Value;
 						item.Size = size;
 
@@ -76,7 +76,7 @@ namespace Extractor.Business
 		}
 
 		/// <remarks>slower than parseNameSize method</remarks>
-		private static IList<Models.LZSS.FileItem> parseNameSizeUpdated(object fileMapObj)
+		private static IList<Data.LZSSFileItem> parseNameSizeUpdated(object fileMapObj)
 		{
 			var checker = Business.CodeTimeChecker.New;
 			Business.StatusManager.Instance.UpdateProgress(0.3);
@@ -89,7 +89,7 @@ namespace Extractor.Business
 					return null;
 				}
 
-				var items = new List<Models.LZSS.FileItem>();
+				var items = new List<Data.LZSSFileItem>();
 
 				Regex parser = new Regex(parserToken);
 
@@ -103,7 +103,7 @@ namespace Extractor.Business
 							long size;
 							if (long.TryParse(match.Groups["size"].Value, out size))
 							{
-								var item = new Models.LZSS.FileItem();
+								var item = new Data.LZSSFileItem();
 								item.Name = match.Groups["name"].Value;
 								item.Size = size;
 
@@ -125,7 +125,7 @@ namespace Extractor.Business
 			}
 		}
 
-		private static IList<Models.LZSS.FileItem> parseIndex(Task<IList<Models.LZSS.FileItem>> parseNameSizeTask)
+		private static IList<Data.LZSSFileItem> parseIndex(Task<IList<Data.LZSSFileItem>> parseNameSizeTask)
 		{
 			var checker = Business.CodeTimeChecker.New;
 			Business.StatusManager.Instance.UpdateProgress(0.6);
@@ -144,7 +144,7 @@ namespace Extractor.Business
 
 				int partialSize = 1000;
 				int partialCount = items.Count / partialSize + (items.Count % partialSize == 0 ? 0 : 1);
-				var partials = new List<List<Models.LZSS.FileItem>>(partialCount);
+				var partials = new List<List<Data.LZSSFileItem>>(partialCount);
 				for (int i = 0; i < partialCount; i++)
 				{
 					partials.Add(items
@@ -182,7 +182,7 @@ namespace Extractor.Business
 			}
 		}
 
-		private static Dictionary<string, int> parseIndexPartial(IList<Models.LZSS.FileItem> partialItems)
+		private static Dictionary<string, int> parseIndexPartial(IList<Data.LZSSFileItem> partialItems)
 		{
 			try
 			{
@@ -253,7 +253,7 @@ namespace Extractor.Business
 
 		private static readonly string rootFolderName = "data_win";
 
-		private static Models.FolderData convert(Task<IList<Models.LZSS.FileItem>> parseIndexTask)
+		private static Data.FolderData convert(Task<IList<Data.LZSSFileItem>> parseIndexTask)
 		{
 			var checker = Business.CodeTimeChecker.New;
 			Business.StatusManager.Instance.UpdateProgress(0.9);
@@ -272,7 +272,7 @@ namespace Extractor.Business
 
 				Regex folderFilter = new Regex(folderFilterToken);
 
-				var rootFolder = new Models.FolderData(rootFolderName);
+				var rootFolder = new Data.FolderData(rootFolderName);
 				var currentFolder = rootFolder;
 				foreach (var lzssItem in lzssFiles)
 				{
@@ -280,13 +280,13 @@ namespace Extractor.Business
 					{
 						if (lzssItem.Name == currentFolder.Name) { continue; }
 
-						var folder = new Models.FolderData(lzssItem.Name);
+						var folder = new Data.FolderData(lzssItem.Name);
 						rootFolder.Add(folder);
 						currentFolder = folder;
 					}
 					else //file
 					{
-						var file = new Models.FileData(lzssItem);
+						var file = new Data.FileData(lzssItem);
 						currentFolder.Add(file);
 					}
 				}
