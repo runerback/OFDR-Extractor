@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Extractor.Shell.Navigation.MenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:navigation="clr-namespace:PageNavigator.Model;assembly=PageNavigator">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type navigation:ModuleData}" ItemsSource="{Binding SubModules, Mode=OneWay}">
+            <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" />
+            <HierarchicalDataTemplate.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" />
+                </DataTemplate>
+            </HierarchicalDataTemplate.ItemTemplate>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+
+    <Menu ItemsSource="{Binding ModuleSets, Mode=OneWay}" Background="Transparent">
+        <!--<Menu.Items>
+            <MenuItem Header="Hi">
+                <MenuItem.Items>
+                    <MenuItem Header="Yo">
+                        <MenuItem.Items>
+                            <MenuItem Header="What's" />
+                            <MenuItem Header="Up?" />
+                        </MenuItem.Items>
+                    </MenuItem>
+                </MenuItem.Items>
+            </MenuItem>
+        </Menu.Items>-->
+    </Menu>
+</UserControl>

@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using System.Threading;
 
-namespace UnitTest.Business
+namespace Extractor.UnitTest.Business
 {
 	[TestFixture]
 	public class LZSSFileMapParserTest
@@ -54,7 +54,7 @@ namespace UnitTest.Business
 		[Test]
 		public void Parse()
 		{
-			Extractor.Models.FolderData rootFolder = null;
+			Data.FolderData rootFolder = null;
 			Assert.DoesNotThrow(delegate
 			{
 				rootFolder = Extractor.Business.LZSSFileMapParser.Parse(this.lzssFileMap);
@@ -63,8 +63,8 @@ namespace UnitTest.Business
 			LZSSFileMapParserTest.rootFolder = rootFolder;
 		}
 
-		private static Extractor.Models.FolderData rootFolder;
-		public static Extractor.Models.FolderData RootFolder
+		private static Data.FolderData rootFolder;
+		public static Data.FolderData RootFolder
 		{
 			get { return LZSSFileMapParserTest.rootFolder; }
 		}

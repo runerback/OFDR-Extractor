@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace UnitTest.Models
+namespace Extractor.UnitTest.Models
 {
 	[TestFixture]
 	public class LzssFileItemTest
@@ -13,7 +13,7 @@ namespace UnitTest.Models
 		public void Parse()
 		{
 			string datOutput = @"\r\ntest file.xml 1\r\ntest file.xml 2\r\n";
-			var list = Extractor.Models.LZSS.FileItem.Parse(datOutput);
+			var list = Data.LZSSFileItem.Parse(datOutput);
 
 			Assert.NotNull(list);
 			Assert.AreEqual(2, list.Count);

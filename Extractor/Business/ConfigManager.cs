@@ -59,8 +59,8 @@ namespace Extractor.Business
 			return true;
 		}
 
-		private static Models.AppSetting settings = new Models.AppSetting();
-		internal static Models.AppSetting CurrentSettingsCopy
+		private static Data.AppSetting settings = new Data.AppSetting();
+		internal static Data.AppSetting CurrentSettingsCopy
 		{
 			get { return settings.Clone(); }
 		}
@@ -70,16 +70,16 @@ namespace Extractor.Business
 		{
 			try
 			{
-				var ofdrRootFolderSection = Properties.Settings.Default[Models.AppSetting.OFDRRootFolderSectionName];
+				var ofdrRootFolderSection = Properties.Settings.Default[Data.AppSetting.OFDRRootFolderSectionName];
 				if (ofdrRootFolderSection == null)
 				{
 					Properties.Settings.Default.Properties.Add(
 						new System.Configuration.SettingsProperty(
-							Models.AppSetting.OFDRRootFolderSectionName,
+							Data.AppSetting.OFDRRootFolderSectionName,
 							settings.OFDRRootFolder.GetType(),
 							new System.Configuration.LocalFileSettingsProvider(),
 							false,
-							Models.AppSetting.OFDRRootFolderDefaultValue,
+							Data.AppSetting.OFDRRootFolderDefaultValue,
 							System.Configuration.SettingsSerializeAs.String,
 							new System.Configuration.SettingsAttributeDictionary(),
 							false,
@@ -116,7 +116,7 @@ namespace Extractor.Business
 				if (value != settings.OFDRRootFolder)
 				{
 					settings.OFDRRootFolder = value;
-					Properties.Settings.Default[Models.AppSetting.OFDRRootFolderSectionName] = value;
+					Properties.Settings.Default[Data.AppSetting.OFDRRootFolderSectionName] = value;
 				}
 			}
 		}
@@ -127,16 +127,16 @@ namespace Extractor.Business
 		{
 			try
 			{
-				var datFilePathSection = Properties.Settings.Default[Models.AppSetting.DATFilePathSectionName];
+				var datFilePathSection = Properties.Settings.Default[Data.AppSetting.DATFilePathSectionName];
 				if (datFilePathSection == null)
 				{
 					Properties.Settings.Default.Properties.Add(
 						new System.Configuration.SettingsProperty(
-							Models.AppSetting.DATFilePathSectionName,
+							Data.AppSetting.DATFilePathSectionName,
 							settings.DATFilePath.GetType(),
 							new System.Configuration.LocalFileSettingsProvider(),
 							false,
-							Models.AppSetting.DATFilePathDefaultValue,
+							Data.AppSetting.DATFilePathDefaultValue,
 							System.Configuration.SettingsSerializeAs.String,
 							new System.Configuration.SettingsAttributeDictionary(),
 							false,
@@ -169,7 +169,7 @@ namespace Extractor.Business
 				if (value != settings.DATFilePath)
 				{
 					settings.DATFilePath = value;
-					Properties.Settings.Default[Models.AppSetting.DATFilePathSectionName] = value;
+					Properties.Settings.Default[Data.AppSetting.DATFilePathSectionName] = value;
 				}
 			}
 		}
@@ -180,16 +180,16 @@ namespace Extractor.Business
 		{
 			try
 			{
-				var outputFolderSection = Properties.Settings.Default[Models.AppSetting.OutputFolderSectionName];
+				var outputFolderSection = Properties.Settings.Default[Data.AppSetting.OutputFolderSectionName];
 				if (outputFolderSection == null)
 				{
 					Properties.Settings.Default.Properties.Add(
 						new System.Configuration.SettingsProperty(
-							Models.AppSetting.OutputFolderSectionName,
+							Data.AppSetting.OutputFolderSectionName,
 							settings.OutputFolder.GetType(),
 							new System.Configuration.LocalFileSettingsProvider(),
 							false,
-							Models.AppSetting.OutputFolderDefaultValue,
+							Data.AppSetting.OutputFolderDefaultValue,
 							System.Configuration.SettingsSerializeAs.String,
 							new System.Configuration.SettingsAttributeDictionary(),
 							false,
@@ -224,7 +224,7 @@ namespace Extractor.Business
 				if (value != settings.OutputFolder)
 				{
 					settings.OutputFolder = value;
-					Properties.Settings.Default[Models.AppSetting.OutputFolderSectionName] = value;
+					Properties.Settings.Default[Data.AppSetting.OutputFolderSectionName] = value;
 				}
 			}
 		}
@@ -236,16 +236,16 @@ namespace Extractor.Business
 		{
 			try
 			{
-				var maxUnpackingParallelismCountSection = Properties.Settings.Default[Models.AppSetting.MaxUnpackingParallelismCountSectionName];
+				var maxUnpackingParallelismCountSection = Properties.Settings.Default[Data.AppSetting.MaxUnpackingParallelismCountSectionName];
 				if (maxUnpackingParallelismCountSection == null)
 				{
 					Properties.Settings.Default.Properties.Add(
 						new System.Configuration.SettingsProperty(
-							Models.AppSetting.MaxUnpackingParallelismCountSectionName,
+							Data.AppSetting.MaxUnpackingParallelismCountSectionName,
 							settings.MaxUnpackingParallelismCount.GetType(),
 							new System.Configuration.LocalFileSettingsProvider(),
 							false,
-							Models.AppSetting.MaxUnpackingParallelismCountDefaultValue,
+							Data.AppSetting.MaxUnpackingParallelismCountDefaultValue,
 							System.Configuration.SettingsSerializeAs.String,
 							new System.Configuration.SettingsAttributeDictionary(),
 							false,
@@ -275,7 +275,7 @@ namespace Extractor.Business
 				if (handledValue != settings.MaxUnpackingParallelismCount)
 				{
 					settings.MaxUnpackingParallelismCount = handledValue;
-					Properties.Settings.Default[Models.AppSetting.MaxUnpackingParallelismCountSectionName] = handledValue;
+					Properties.Settings.Default[Data.AppSetting.MaxUnpackingParallelismCountSectionName] = handledValue;
 				}
 			}
 		}

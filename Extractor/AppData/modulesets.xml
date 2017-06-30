@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ModuleSets>
+  <Module name="ModuleA" title="Module A">
+    <Module name="ModuleAPart1" title="A Part1" />
+    <Module name="ModuleAPart2" title="A Part2" />
+  </Module>
+</ModuleSets>

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace UnitTest.Business
+namespace Extractor.UnitTest.Business
 {
 	[TestFixture]
 	public class FileUnpackingManagerTest
 	{
-		private Extractor.Models.FolderData rootFolder;
+		private Extractor.Data.FolderData rootFolder;
 
 		public FileUnpackingManagerTest()
 		{
@@ -34,7 +34,7 @@ namespace UnitTest.Business
 				Extractor.Business.FileUnpackingManager.Unpack(targetFile);
 				this.blocker.WaitOne();
 
-				Assert.AreEqual(Extractor.Models.TreeNodeState.Ready, targetFile.TreeNode.State);
+				Assert.AreEqual(Extractor.Data.TreeNodeState.Ready, targetFile.TreeNode.State);
 			}
 			finally
 			{
@@ -56,7 +56,7 @@ namespace UnitTest.Business
 					Extractor.Business.FileUnpackingManager.Unpack(targetFile);
 					this.blocker.WaitOne();
 
-					Assert.AreEqual(Extractor.Models.TreeNodeState.Ready, targetFile.TreeNode.State);
+					Assert.AreEqual(Data.TreeNodeState.Ready, targetFile.TreeNode.State);
 				}
 			}
 			finally
@@ -73,14 +73,14 @@ namespace UnitTest.Business
 				var rootFolder = this.rootFolder;
 				var targetFolder = rootFolder.SubFolders.Random(folder => folder.Files.Count > 0);
 
-				Extractor.Models.FolderData fakeFolder = new Extractor.Models.FolderData("test");
-				fakeFolder.Add(new Extractor.Models.FileData(new Extractor.Models.LZSS.FileItem()
+				Extractor.Data.FolderData fakeFolder = new Extractor.Data.FolderData("test");
+				fakeFolder.Add(new Extractor.Data.FileData(new Extractor.Data.LZSSFileItem()
 				{
 					Name = "test.txt",
 					Index = 0,
 					Size = 100
 				}));
-				fakeFolder.Add(new Extractor.Models.FileData(new Extractor.Models.LZSS.FileItem()
+				fakeFolder.Add(new Extractor.Data.FileData(new Extractor.Data.LZSSFileItem()
 				{
 					Name = "test.txt",
 					Index = 1,
@@ -96,7 +96,7 @@ namespace UnitTest.Business
 
 		private void onFieUnpackingComplted(object sender, EventArgs e)
 		{
-			Console.WriteLine("file unpacking completed: {0}", (sender as Extractor.Models.FileData).Name);
+			Console.WriteLine("file unpacking completed: {0}", (sender as Extractor.Data.FileData).Name);
 			this.blocker.Set();
 		}
 

@@ -24,11 +24,11 @@ namespace Extractor
 			InitializeComponent();
 		}
 
-		protected override void OnContentRendered(EventArgs e)
-		{
-			base.OnContentRendered(e);
+		//protected override void OnContentRendered(EventArgs e)
+		//{
+		//	base.OnContentRendered(e);
 
-			this.DataContext = new Presentation.Controller.PageController();
-		}
+		//	this.DataContext = new Presentation.Controller.PageController();
+		//}
 	}
 }
