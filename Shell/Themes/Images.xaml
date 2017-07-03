@@ -1,16 +1,20 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Image x:Key="btn_pause" Stretch="Fill" Source="/Resources/Images/btn_pause.png" />
-    <Image x:Key="btn_start" Stretch="Fill" Source="/Resources/Images/btn_start.png" />
-    <Image x:Key="btn_resume" Stretch="Fill" Source="/Resources/Images/btn_resume.png" />
-    <Image x:Key="btn_stop" Stretch="Fill" Source="/Resources/Images/btn_stop.png" />
-    <Image x:Key="btn_stopped" Stretch="Fill" Source="/Resources/Images/btn_stopped.png" />
-    <BitmapImage x:Key="state_error" UriSource="/Resources/Images/state_error.png" />
-    <BitmapImage x:Key="state_processing" UriSource="/Resources/Images/state_processing.png" />
-    <BitmapImage x:Key="state_ready" UriSource="/Resources/Images/state_ready.png" />
-    <BitmapImage x:Key="state_standby" UriSource="/Resources/Images/state_standby.png" />
-    <BitmapImage x:Key="type_file" UriSource="/Resources/Images/type_file.png" />
-    <BitmapImage x:Key="type_folder" UriSource="/Resources/Images/type_folder.png" />
-    <BitmapImage x:Key="navigate_back" UriSource="/Resources/Images/navigate_back.png" />
-    <BitmapImage x:Key="navigate_forward" UriSource="/Resources/Images/navigate_forward.png" />
+    <Image x:Key="btn_pause" Stretch="Fill" Source="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/btn_pause.png" />
+    <Image x:Key="btn_start" Stretch="Fill" Source="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/btn_start.png" />
+    <Image x:Key="btn_resume" Stretch="Fill" Source="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/btn_resume.png" />
+    <Image x:Key="btn_stop" Stretch="Fill" Source="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/btn_stop.png" />
+    <Image x:Key="btn_stopped" Stretch="Fill" Source="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/btn_stopped.png" />
+    <BitmapImage x:Key="state_error" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/state_error.png" />
+    <BitmapImage x:Key="state_processing" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/state_processing.png" />
+    <BitmapImage x:Key="state_ready" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/state_ready.png" />
+    <BitmapImage x:Key="state_standby" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/state_standby.png" />
+    <BitmapImage x:Key="type_file" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/type_file.png" />
+    <BitmapImage x:Key="type_folder" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/type_folder.png" />
+    <BitmapImage x:Key="navigate_back" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/navigate_back.png" />
+    <BitmapImage x:Key="navigate_forward" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/navigate_forward.png" />
+    <BitmapImage x:Key="navigate_back_disabled" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/navigate_back_disabled.png" />
+    <BitmapImage x:Key="navigate_forward_disabled" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Icons/navigate_forward_disabled.png" />
+
+    <BitmapImage x:Key="MUL01" UriSource="pack://application:,,,/OFDRExtractorShell;component/Resources/Images/MUL01.png" />
 </ResourceDictionary>

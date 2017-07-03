@@ -71,6 +71,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Navigation\TabBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\ButtonTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,17 +111,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\InitialView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\ModulesManager.cs" />
     <Compile Include="Controls\DraggableGizmo.cs" />
     <Compile Include="Controls\FileMapPresenter.cs" />
     <Compile Include="Controls\FolderDataPersenter.cs" />
     <Compile Include="Controls\StatusPresenter.cs" />
+    <Compile Include="Converters\AntiVisibilityBooleanConverter.cs" />
+    <Compile Include="Converters\OppositeBooleanConverter.cs" />
     <Compile Include="Framework.xaml.cs">
       <DependentUpon>Framework.xaml</DependentUpon>
     </Compile>
@@ -129,6 +138,9 @@
     </Compile>
     <Compile Include="Navigation\PageContainer.xaml.cs">
       <DependentUpon>PageContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation\TabBar.xaml.cs">
+      <DependentUpon>TabBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -145,6 +157,9 @@
     </Compile>
     <Compile Include="View\FileMapManagerView.xaml.cs">
       <DependentUpon>FileMapManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InitialView.xaml.cs">
+      <DependentUpon>InitialView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -174,41 +189,48 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_pause.png" />
+    <Resource Include="Resources\Icons\btn_pause.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_resume.png" />
+    <Resource Include="Resources\Icons\btn_resume.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_start.png" />
+    <Resource Include="Resources\Icons\btn_start.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_stop.png" />
+    <Resource Include="Resources\Icons\btn_stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\btn_stopped.png" />
+    <Resource Include="Resources\Icons\btn_stopped.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\state_error.png" />
+    <Resource Include="Resources\Icons\state_error.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\state_processing.png" />
+    <Resource Include="Resources\Icons\state_processing.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\state_ready.png" />
+    <Resource Include="Resources\Icons\state_ready.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\state_standby.png" />
+    <Resource Include="Resources\Icons\state_standby.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\type_file.png" />
+    <Resource Include="Resources\Icons\type_file.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\type_folder.png" />
+    <Resource Include="Resources\Icons\type_folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\navigate_back.png" />
-    <Resource Include="Resources\Images\navigate_forward.png" />
+    <Resource Include="Resources\Icons\navigate_back.png" />
+    <Resource Include="Resources\Icons\navigate_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\navigate_back_disabled.png" />
+    <Resource Include="Resources\Icons\navigate_forward_disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\MUL01.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

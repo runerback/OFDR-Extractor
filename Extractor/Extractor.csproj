@@ -43,6 +43,10 @@
     <Reference Include="Microsoft.WindowsAPICodePack.Shell">
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="PageNavigator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PageNavigator\PageNavigator.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -78,8 +82,12 @@
     <Compile Include="Business\FileUnpackingManager.cs" />
     <Compile Include="Business\IOFilesManager.cs" />
     <Compile Include="Business\LZSSFileMapParser.cs" />
+    <Compile Include="Business\ModulesManager.cs" />
     <Compile Include="Business\ReferenceComparer.cs" />
     <Compile Include="Business\StatusManager.cs" />
+    <Compile Include="Controllers\Help\AboutController.cs" />
+    <Compile Include="Controllers\HomePageController.cs" />
+    <Compile Include="Controllers\Tool\OptionsController.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -88,6 +96,7 @@
   <ItemGroup>
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
+    <Compile Include="Presentation\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

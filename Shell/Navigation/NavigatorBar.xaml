@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Extractor.Shell.Navigation.NavigatorBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="16" />
@@ -12,10 +13,51 @@
         </Grid.RowDefinitions>
 
         <Button Grid.Column="0" Command="{Binding NavigateBack}">
-            <Image Source="{StaticResource navigate_back}" />
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle" Value="False" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="{StaticResource navigate_back}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="{StaticResource navigate_back_disabled}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
+
         <Button Grid.Column="2" Command="{Binding NavigateForward}">
-            <Image Source="{StaticResource navigate_forward}" />
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="OverridesDefaultStyle" Value="False" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="{StaticResource navigate_forward}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Content">
+                                <Setter.Value>
+                                    <Image Source="{StaticResource navigate_forward_disabled}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
         </Button>
     </Grid>
 </UserControl>

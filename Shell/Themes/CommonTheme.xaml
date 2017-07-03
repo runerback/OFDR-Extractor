@@ -21,4 +21,9 @@
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="ResizeMode" Value="CanResize" />
     </Style>
+    
+    <Style TargetType="{x:Type UserControl}">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+    </Style>
 </ResourceDictionary>
