@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 namespace Extractor.Shell.Navigation
 {
 	/// <summary>
-	/// Interaction logic for Navigator.xaml
+	/// Interaction logic for TabBar.xaml
 	/// </summary>
-	public partial class NavigatorBar : UserControl
+	public partial class TabBar : UserControl
 	{
-		public NavigatorBar()
+		public TabBar()
 		{
 			InitializeComponent();
-			
-			DataContext = PageNavigator.Business.ViewModels.NavigatorViewModel;
+
+			DataContext = PageNavigator.Business.ViewModels.TabContainerViewModel;
 		}
 	}
 }

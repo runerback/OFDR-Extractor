@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ModuleSets>
-  <Module name="ModuleA" title="Module A">
-    <Module name="ModuleAPart1" title="A Part1" />
-    <Module name="ModuleAPart2" title="A Part2" />
+  <Module name="tool" title="TOOLS">
+    <Module name="options" title="Options" />
+  </Module>
+  <Module name="help" title="HELP">
+    <Module name="about" title="About" />
   </Module>
 </ModuleSets>

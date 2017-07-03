@@ -49,7 +49,7 @@
                         </VisualStateManager.VisualStateGroups>
                         <Border x:Name="Background" Background="White" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
                             <Grid Background="{TemplateBinding Background}"  Margin="0">
-                                <Border Opacity="0" x:Name="BackgroundAnimation" Background="WhiteSmoke" />
+                                <Border Opacity="0" x:Name="BackgroundAnimation" Background="White" />
                             </Grid>
                         </Border>
                         <ContentPresenter

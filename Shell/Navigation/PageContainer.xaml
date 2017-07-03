@@ -3,6 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ScrollViewer HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
-                  Padding="6" Margin="6"
                   Content="{Binding CurrentController.CurrentPage, Mode=OneWay}" />
 </UserControl>

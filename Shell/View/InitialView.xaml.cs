@@ -12,18 +12,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Extractor.Shell.Navigation
+namespace Extractor.Shell.View
 {
 	/// <summary>
-	/// Interaction logic for Navigator.xaml
+	/// Interaction logic for InitialView.xaml
 	/// </summary>
-	public partial class NavigatorBar : UserControl
+	public partial class InitialView : UserControl
 	{
-		public NavigatorBar()
+		public InitialView()
 		{
 			InitializeComponent();
-			
-			DataContext = PageNavigator.Business.ViewModels.NavigatorViewModel;
 		}
 	}
 }

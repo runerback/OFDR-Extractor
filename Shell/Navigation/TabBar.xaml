@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="Extractor.Shell.Navigation.TabBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Extractor.Shell.Converters">
+    <UserControl.Resources>
+        <converters:AntiVisibilityBooleanConvert x:Key="AntiVisibilityBooleanConverter" />
+        <converters:OppositeBooleanConverter x:Key="OppositeBooleanConverter" />
+
+        <DataTemplate x:Key="moduleControllerTemplate">
+            <ToggleButton Command="{Binding DataContext.NavigateToModule, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl, AncestorLevel=1}}"
+                          CommandParameter="{Binding .}"
+                          IsChecked="{Binding IsActivated, Mode=TwoWay}"
+                          Focusable="{Binding IsActivated, Mode=OneWay, Converter={StaticResource OppositeBooleanConverter}}"
+                          IsThreeState="False" Margin="6 -3" Padding="-3" BorderThickness="0"
+                          ToolTip="{Binding Module.Title, Mode=OneWay}">
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <TextBlock Text="{Binding Module.Title, Mode=OneWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="3 0" />
+                    <ToggleButton Content="P"
+                                  Command="{Binding DataContext.PinModule, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl, AncestorLevel=1}}" 
+                                  CommandParameter="{Binding .}"
+                                  ToolTip="Toggle pin status"
+                                  Visibility="{Binding IsHomePage, Converter={StaticResource AntiVisibilityBooleanConverter}}"
+                                  IsThreeState="False"
+                                  IsChecked="{Binding IsPinned, Mode=OneWay}" />
+                    <Button Content="X"
+                            Command="{Binding DataContext.CloseModule, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl, AncestorLevel=1}}" 
+                            CommandParameter="{Binding .}"
+                            ToolTip="Close"
+                            Visibility="{Binding IsHomePage, Converter={StaticResource AntiVisibilityBooleanConverter}}" />
+                </StackPanel>
+            </ToggleButton>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ItemsControl ItemsSource="{Binding ModuleControllers, Mode=OneWay}"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                      ItemTemplate="{StaticResource moduleControllerTemplate}" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Margin="0" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>

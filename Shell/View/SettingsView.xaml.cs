@@ -22,6 +22,8 @@ namespace Extractor.Shell.View
 		public SettingsView()
 		{
 			InitializeComponent();
+
+			DataContext = PageNavigator.Business.ViewModels.TabContainerViewModel;
 		}
 	}
 }

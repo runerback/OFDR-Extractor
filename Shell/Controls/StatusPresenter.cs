@@ -5,23 +5,22 @@ using System.Windows.Data;
 
 namespace Extractor.Shell.Controls
 {
-	public class StatusPresenter : StackPanel
+	public class StatusPresenter : ContentControl
 	{
 		protected override void OnInitialized(EventArgs e)
 		{
-			base.OnInitialized(e);
+			Grid root = new Grid() { Margin = default(Thickness) };
 
-			this.Orientation = System.Windows.Controls.Orientation.Vertical;
+			root.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(6) });
+			root.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
 
 			ProgressBar progressBar = new ProgressBar() { Maximum = 100.0 };
-
 			BindingBase pgBarValueBinding = new Binding()
 			{
 				Path = new PropertyPath("CurrentProgress"),
 				Mode = BindingMode.OneWay
 			};
 			BindingOperations.SetBinding(progressBar, ProgressBar.ValueProperty, pgBarValueBinding);
-
 			BindingBase pgBarVisibilityBinding = new Binding()
 			{
 				Path = new PropertyPath("ProgressBarVisibility"),
@@ -29,9 +28,11 @@ namespace Extractor.Shell.Controls
 			};
 			BindingOperations.SetBinding(progressBar, ProgressBar.VisibilityProperty, pgBarVisibilityBinding);
 
+			root.Children.Add(progressBar);
+			Grid.SetRow(progressBar, 0);
 
-			TextBlock statusBar = new TextBlock() { Margin = new Thickness(0) };
 
+			TextBlock statusBar = new TextBlock() { Margin = default(Thickness) };
 			BindingBase statusBarValueBinding = new Binding()
 			{
 				Path = new PropertyPath("Status"),
@@ -39,8 +40,12 @@ namespace Extractor.Shell.Controls
 			};
 			BindingOperations.SetBinding(statusBar, TextBlock.TextProperty, statusBarValueBinding);
 
-			this.Children.Add(statusBar);
-			this.Children.Add(progressBar);
+			root.Children.Add(statusBar);
+			Grid.SetRow(statusBar, 1);
+
+			this.Content = root;
+
+			base.OnInitialized(e);
 		}
 	}
 }

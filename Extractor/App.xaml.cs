@@ -26,7 +26,7 @@ namespace Extractor
 					return;
 				}
 
-				Shell.Business.ModulesManager.Initialize();
+				Business.ModulesManager.Initialize();
 
 				v.Content = new Shell.Framework()
 				{

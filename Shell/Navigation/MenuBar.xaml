@@ -3,28 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:navigation="clr-namespace:PageNavigator.Model;assembly=PageNavigator">
     <UserControl.Resources>
-        <HierarchicalDataTemplate DataType="{x:Type navigation:ModuleData}" ItemsSource="{Binding SubModules, Mode=OneWay}">
-            <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" />
+        <Style TargetType="MenuItem">
+            <Setter Property="ItemsSource" Value="{Binding SubModules, Mode=OneWay}" />
+            <Setter Property="Command" Value="{Binding DataContext.OpenModule, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl, AncestorLevel=1}}" />
+            <Setter Property="CommandParameter" Value="{Binding}" />
+        </Style>
+        
+        <HierarchicalDataTemplate DataType="{x:Type navigation:ModuleData}">
+            <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" Margin="-9, -6" Padding="3" />
             <HierarchicalDataTemplate.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" />
+                <DataTemplate DataType="{x:Type navigation:ModuleData}">
+                    <TextBlock Text="{Binding Title, Mode=OneWay}" FontWeight="Black" Margin="-16, -9" Padding="6 3" />
                 </DataTemplate>
             </HierarchicalDataTemplate.ItemTemplate>
         </HierarchicalDataTemplate>
     </UserControl.Resources>
 
-    <Menu ItemsSource="{Binding ModuleSets, Mode=OneWay}" Background="Transparent">
-        <!--<Menu.Items>
-            <MenuItem Header="Hi">
-                <MenuItem.Items>
-                    <MenuItem Header="Yo">
-                        <MenuItem.Items>
-                            <MenuItem Header="What's" />
-                            <MenuItem Header="Up?" />
-                        </MenuItem.Items>
-                    </MenuItem>
-                </MenuItem.Items>
-            </MenuItem>
-        </Menu.Items>-->
-    </Menu>
+    <Menu ItemsSource="{Binding ModuleSets, Mode=OneWay}" Background="Transparent" />
 </UserControl>

@@ -4,14 +4,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ButtonTheme.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/CheckBoxTheme.xaml" />
+                <!--these resources should be ordered by reference-->
+                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/Images.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/CommonTheme.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/Images.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ButtonTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ToggleButtonTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/CheckBoxTheme.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/MenuTheme.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ProgressBarTheme.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ToggleButtonTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

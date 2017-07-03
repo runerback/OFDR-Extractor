@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Extractor.Shell.View.InitialView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Image Stretch="Fill" Source="{StaticResource MUL01}" />
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="ExtraBold" Margin="36" FontSize="25">
+            <Run Text="OFDR Extractor" Foreground="Red" />
+            <Run Text="with UI" Foreground="Black" />
+        </TextBlock>
+    </Grid>
+</UserControl>

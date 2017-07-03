@@ -75,5 +75,5 @@
 
     </UserControl.Resources>
     
-    <controls:FileMapPresenter ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" Margin="6 0" />
+    <controls:FileMapPresenter ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" BorderThickness="0" />
 </UserControl>
