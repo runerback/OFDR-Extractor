@@ -29,6 +29,7 @@ namespace Extractor.Common
 						Dispatcher dispatcher = dispatcherObj.Dispatcher;
 						if (!dispatcher.CheckAccess())
 						{
+							//cause dead-lock while waiting thread to finish.
 							dispatcher.Invoke((Action<NotifyCollectionChangedEventArgs>)this.OnCollectionChanged, DispatcherPriority.DataBind, e);
 							continue;
 						}

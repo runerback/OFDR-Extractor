@@ -91,7 +91,10 @@ namespace Extractor.Shell.Controls
 				if (!this.isDragging)
 				{
 					Point newLocation = e.GetPosition(this);
-					if (this.lastPressedLocation != newLocation)
+					//if (this.lastPressedLocation != newLocation)
+					//comparison did not work
+					Vector offset = this.lastPressedLocation - newLocation;
+					if (offset.LengthSquared > 18)
 					{
 						this.lastPressedLocation = newLocation;
 						this.isDragging = true;

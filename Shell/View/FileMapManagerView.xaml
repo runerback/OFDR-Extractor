@@ -74,6 +74,6 @@
         </DataTemplate>
 
     </UserControl.Resources>
-    
+
     <controls:FileMapPresenter ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" BorderThickness="0" />
 </UserControl>
