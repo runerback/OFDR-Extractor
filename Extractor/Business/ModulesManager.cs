@@ -32,7 +32,7 @@ namespace Extractor.Business
 				case "options":
 					return new Controllers.Tool.OptionsController(moduleData);
 				case "about":
-					return null;
+					return new Controllers.Help.AboutController(moduleData);
 				case "home":
 					return new Controllers.HomePageController(moduleData);
 				default:

@@ -19,14 +19,6 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="Background" Value="White" />
         </Style>
-        
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0 1" />
-            <Setter Property="IsReadOnly" Value="True" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -45,8 +37,9 @@
             </Grid.ColumnDefinitions>
             
             <TextBlock Text="OFDR Installation Folder" Grid.Column="0" />
-            <TextBox Text="{Binding CurrentAppSettings.OFDRRootFolder, Mode=OneWay}" Grid.Column="1" />
-            <Button Content="..." ToolTip="Choose OFDR Installation Folder" Grid.Column="2" />
+            <TextBox Text="{Binding OFDRRootFolder, Mode=OneWay, NotifyOnValidationError=True}" Grid.Column="1" Style="{StaticResource readonlyTextBoxStyle}" />
+            <Button Content="..." ToolTip="Choose OFDR Installation Folder" Grid.Column="2"
+                    Command="{Binding ChooseOFDRRootFolderCommand, Mode=OneWay}" />
         </Grid>
         
         <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="0 1">
@@ -58,8 +51,9 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="DAT File Path" Grid.Column="0" />
-                <TextBox Text="{Binding CurrentAppSettings.DATFilePath, Mode=OneWay}" Grid.Column="1" />
-                <Button Content="..." ToolTip="Choose dat.exe File Path" Grid.Column="2" />
+                <TextBox Text="{Binding DATFilePath, Mode=OneWay, NotifyOnValidationError=True}" Grid.Column="1" Style="{StaticResource readonlyTextBoxStyle}" />
+                <Button Content="..." ToolTip="Choose dat.exe File Path" Grid.Column="2"
+                    Command="{Binding ChooseDATFilePathCommand, Mode=OneWay}" />
             </Grid>
         </Border>
 
@@ -71,8 +65,9 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Text="Output Folder" Grid.Column="0" />
-            <TextBox Text="{Binding CurrentAppSettings.OutputFolder, Mode=OneWay}" Grid.Column="1" />
-            <Button Content="..." ToolTip="Choose Output Folder" Grid.Column="2" />
+            <TextBox Text="{Binding OutputFolder, Mode=OneWay, NotifyOnValidationError=True}" Grid.Column="1" Style="{StaticResource readonlyTextBoxStyle}" />
+            <Button Content="..." ToolTip="Choose Output Folder" Grid.Column="2"
+                    Command="{Binding ChooseOutputFolderCommand, Mode=OneWay}" />
         </Grid>
 
         <Border Grid.Row="3" BorderBrush="LightGray" BorderThickness="0 1">
@@ -84,12 +79,13 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock Text="Unpacking Thread Count" Grid.Column="0" />
-                <TextBox Text="1" Width="16" Grid.Column="1" />
+                <TextBox Text="{Binding MaxUnpackingParallelismCount, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
+                         Width="36" Grid.Column="1" />
             </Grid>
         </Border>
 
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-
+            
         </StackPanel>
     </Grid>
 </UserControl>
