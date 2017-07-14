@@ -53,6 +53,7 @@ namespace Extractor.Data
 
 		public virtual void MoveTo(FileDataBase destination)
 		{
+			this.ParentFolder.Remove(this);
 			if (destination.TreeNode.NodeType == TreeNodeType.File)
 			{
 				destination.ParentFolder.Add(this);
@@ -65,7 +66,6 @@ namespace Extractor.Data
 			{
 				throw new NotImplementedException(destination.TreeNode.NodeType.ToString());
 			}
-			this.ParentFolder.Remove(this);
 		}
 
 		public override string ToString()
