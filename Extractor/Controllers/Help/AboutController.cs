@@ -15,8 +15,7 @@ namespace Extractor.Controllers.Help
 
 		protected override System.Windows.FrameworkElement setStartPage()
 		{
-			var v = new Shell.View.FileMapManagerView();
-			v.DataContext = new Presentation.ViewModel.FileMapManagerViewModel();
+			var v = new Shell.View.AboutView();
 			return v;
 		}
 	}

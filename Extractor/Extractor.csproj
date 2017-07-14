@@ -48,6 +48,7 @@
       <HintPath>..\packages\PageNavigator\PageNavigator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -94,6 +95,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presentation\ViewModelMetadata\SettingsViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
     <Compile Include="Presentation\ViewModel\SettingsViewModel.cs" />

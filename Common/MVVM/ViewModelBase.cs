@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Extractor.Common
 {
 	public class ViewModelBase : System.ComponentModel.INotifyPropertyChanged
 	{
+		protected ViewModelBase() { }
+
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
 		public void NotifyPropertyChanged(string propertyName)
