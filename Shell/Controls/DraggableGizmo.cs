@@ -78,9 +78,6 @@ namespace Extractor.Shell.Controls
 			base.OnDrop(e);
 		}
 
-
-
-		private bool isDragging;
 		private bool canDrop;
 		private Point lastPressedLocation;
 
@@ -126,6 +123,50 @@ namespace Extractor.Shell.Controls
 		{
 			if (this.isDragging)
 				this.isDragging = false;
+		}
+
+		private bool _isDragging;
+		private bool isDragging
+		{
+			get { return this._isDragging; }
+			set
+			{
+				if (value != _isDragging)
+				{
+					_isDragging = value;
+					IsDragging = value;
+				}
+			}
+		}
+
+		//cannot use ReadOnlyDependencyProperty due to the limitation in wpf
+
+		//internal static readonly DependencyPropertyKey IsDraggingPropertyKey =
+		//    DependencyProperty.RegisterReadOnly(
+		//        "IsDragging",
+		//        typeof(bool),
+		//        typeof(DraggableGizmo),
+		//        new PropertyMetadata(false));
+
+		//public static readonly DependencyProperty IsDraggingProperty =
+		//    IsDraggingPropertyKey.DependencyProperty;
+
+		internal static readonly DependencyProperty IsDraggingProperty =
+			DependencyProperty.Register(
+				"IsDragging",
+				typeof(bool),
+				typeof(DraggableGizmo),
+				new PropertyMetadata(false));//, onIsDraggingPropertyChanged));
+
+		internal bool IsDragging
+		{
+			get { return (bool)GetValue(IsDraggingProperty); }
+			set { SetValue(IsDraggingProperty, value); }
+		}
+
+		private static void onIsDraggingPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+
 		}
 	}
 }
