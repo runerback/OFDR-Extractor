@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Extractor.Shell.Controls
 {
@@ -58,12 +60,18 @@ namespace Extractor.Shell.Controls
 			if (this.canDrop)
 			{
 				e.Effects = DragDropEffects.Move;
+				e.Handled = true;
 			}
 			else
 			{
 				e.Effects = DragDropEffects.None;
 				e.Handled = true;
 			}
+		}
+
+		internal void RoutedPreviewDragOver(DragEventArgs e)
+		{
+			this.OnPreviewDragOver(e);
 		}
 
 		protected override void OnDrop(System.Windows.DragEventArgs e)
@@ -79,6 +87,12 @@ namespace Extractor.Shell.Controls
 		}
 
 		private bool canDrop;
+		public bool CanDrop
+		{
+			get { return this.canDrop; }
+		}
+
+		private bool isDragging;
 		private Point lastPressedLocation;
 
 		protected override void OnPreviewMouseMove(System.Windows.Input.MouseEventArgs e)
@@ -88,8 +102,6 @@ namespace Extractor.Shell.Controls
 				if (!this.isDragging)
 				{
 					Point newLocation = e.GetPosition(this);
-					//if (this.lastPressedLocation != newLocation)
-					//comparison did not work
 					Vector offset = this.lastPressedLocation - newLocation;
 					if (offset.LengthSquared > 18)
 					{
@@ -123,50 +135,6 @@ namespace Extractor.Shell.Controls
 		{
 			if (this.isDragging)
 				this.isDragging = false;
-		}
-
-		private bool _isDragging;
-		private bool isDragging
-		{
-			get { return this._isDragging; }
-			set
-			{
-				if (value != _isDragging)
-				{
-					_isDragging = value;
-					IsDragging = value;
-				}
-			}
-		}
-
-		//cannot use ReadOnlyDependencyProperty due to the limitation in wpf
-
-		//internal static readonly DependencyPropertyKey IsDraggingPropertyKey =
-		//    DependencyProperty.RegisterReadOnly(
-		//        "IsDragging",
-		//        typeof(bool),
-		//        typeof(DraggableGizmo),
-		//        new PropertyMetadata(false));
-
-		//public static readonly DependencyProperty IsDraggingProperty =
-		//    IsDraggingPropertyKey.DependencyProperty;
-
-		internal static readonly DependencyProperty IsDraggingProperty =
-			DependencyProperty.Register(
-				"IsDragging",
-				typeof(bool),
-				typeof(DraggableGizmo),
-				new PropertyMetadata(false));//, onIsDraggingPropertyChanged));
-
-		internal bool IsDragging
-		{
-			get { return (bool)GetValue(IsDraggingProperty); }
-			set { SetValue(IsDraggingProperty, value); }
-		}
-
-		private static void onIsDraggingPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-
 		}
 	}
 }

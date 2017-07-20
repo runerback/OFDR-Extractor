@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Extractor.Business
@@ -40,6 +41,27 @@ namespace Extractor.Business
 					}
 				}
 			}
+		}
+
+		public static void NewTask(Action action)
+		{
+			Task.Factory.StartNew(action).createExceptionHandler();
+		}
+
+		public static void NewTask(Action<object> action, object state)
+		{
+			Task.Factory.StartNew(action, state).createExceptionHandler();
+		}
+
+		private static void createExceptionHandler(this Task task)
+		{
+			task.ContinueWith(t =>
+			{
+				if (t.Exception != null)
+				{
+					ShowPopup(t.Exception);
+				}
+			},  TaskContinuationOptions.OnlyOnFaulted);
 		}
 	}
 }

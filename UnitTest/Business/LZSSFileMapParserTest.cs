@@ -12,13 +12,13 @@ namespace Extractor.UnitTest.Business
 	{
 		public LZSSFileMapParserTest()
 		{
-			Extractor.Business.DATManager.DataReceived += this.onDataReceived;
-			Extractor.Business.DATManager.Exited += this.onExited;
+			Extractor.Business.DATManagerSingleton.DataReceived += this.onDataReceived;
+			Extractor.Business.DATManagerSingleton.Exited += this.onExited;
 			Console.Write("callDAT start");
 			this.callDAT();
 			Console.Write("callDAT end");
-			Extractor.Business.DATManager.DataReceived -= this.onDataReceived;
-			Extractor.Business.DATManager.Exited -= this.onExited;
+			Extractor.Business.DATManagerSingleton.DataReceived -= this.onDataReceived;
+			Extractor.Business.DATManagerSingleton.Exited -= this.onExited;
 		}
 
 		private AutoResetEvent blocker;
@@ -28,7 +28,7 @@ namespace Extractor.UnitTest.Business
 			this.blocker = new AutoResetEvent(false);
 			try
 			{
-				Assert.Greater(Extractor.Business.DATManager.Call(), -1);
+				Assert.Greater(Extractor.Business.DATManagerSingleton.Call(), -1);
 			}
 			finally
 			{
