@@ -43,6 +43,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingProxy.cs" />
     <Compile Include="Count.cs" />
     <Compile Include="Foreach.cs" />
     <Compile Include="IndexOf.cs" />

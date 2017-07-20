@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/MenuTheme.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ProgressBarTheme.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/OFDRExtractorShell;component/Themes/ContextMenuTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

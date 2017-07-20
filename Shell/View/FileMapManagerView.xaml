@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:models="clr-namespace:Extractor.Data;assembly=OFDRExtractorData"
              xmlns:extensions="clr-namespace:Extractor.Extension;assembly=OFDRExtractorExtension"
-             xmlns:controls="clr-namespace:Extractor.Shell.Controls">
+             xmlns:controls="clr-namespace:Extractor.Shell.Controls"
+             xmlns:local="clr-namespace:Extractor.Shell.View">
     <UserControl.Resources>
         
         <DataTemplate DataType="{x:Type models:TreeNodeType}">
@@ -75,5 +76,12 @@
 
     </UserControl.Resources>
 
-    <controls:FileMapPresenter x:Name="map" ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" BorderThickness="0" />
+    <controls:FileMapPresenter x:Name="map" ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" BorderThickness="0">
+        <controls:FileMapPresenter.Resources>
+            <extensions:BindingProxy Data="{Binding}" x:Key="mapDataBindingProxy" />
+        </controls:FileMapPresenter.Resources>
+        <controls:FileMapPresenter.ContextMenu>
+            <local:ContextMenuView DataContext="{Binding Path=Data.MenuDataContext, Mode=OneWay, Source={StaticResource mapDataBindingProxy}}" />
+        </controls:FileMapPresenter.ContextMenu>
+    </controls:FileMapPresenter>
 </UserControl>
