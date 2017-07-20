@@ -81,6 +81,7 @@
     <Compile Include="Business\DAT.cs" />
     <Compile Include="Business\DATManagerSingleton.cs" />
     <Compile Include="Business\ExceptionManager.cs" />
+    <Compile Include="Business\FileExtractor.cs" />
     <Compile Include="Business\FileUnpackingManager.cs" />
     <Compile Include="Business\IOFilesManager.cs" />
     <Compile Include="Business\LZSSFileMapParser.cs" />
@@ -97,8 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presentation\ViewModelMetadata\SettingsViewModel.cs" />
+    <Compile Include="Presentation\ViewModel\ContextMenuViewModelBase.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModelTediously.cs" />
+    <Compile Include="Presentation\ViewModel\FileMapMenuViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
     <Compile Include="Presentation\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

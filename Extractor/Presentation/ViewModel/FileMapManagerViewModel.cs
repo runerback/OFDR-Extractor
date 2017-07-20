@@ -49,5 +49,11 @@ namespace Extractor.Presentation.ViewModel
 		{
 			get { return this.rootSource; }
 		}
+
+		private FileMapMenuViewModel menuDataContext = new FileMapMenuViewModel();
+		public FileMapMenuViewModel MenuDataContext
+		{
+			get { return this.menuDataContext; }
+		}
 	}
 }

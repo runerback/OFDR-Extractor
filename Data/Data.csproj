@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UIModels\MenuItemModel.cs" />
     <Compile Include="Models\FileData\FileData.cs" />
     <Compile Include="Models\FileData\FileDataBase.cs" />
     <Compile Include="Models\FileData\FolderData.cs" />
