@@ -10,7 +10,7 @@ using System.Collections.Concurrent;
 
 namespace Extractor.Business
 {
-	public static class DATManager
+	public static class DATManagerSingleton
 	{
 		private static ConcurrentDictionary<int, StringBuilder> receivedDataMap = new ConcurrentDictionary<int, StringBuilder>();
 

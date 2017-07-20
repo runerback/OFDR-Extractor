@@ -12,8 +12,8 @@ namespace Extractor.UnitTest.Business
 	{
 		public DATManagerTest()
 		{
-			Extractor.Business.DATManager.DataReceived += this.onDataReceived;
-			Extractor.Business.DATManager.Exited += this.onExited;
+			Extractor.Business.DATManagerSingleton.DataReceived += this.onDataReceived;
+			Extractor.Business.DATManagerSingleton.Exited += this.onExited;
             this.blocker = new AutoResetEvent(true);
 		}
 
@@ -25,7 +25,7 @@ namespace Extractor.UnitTest.Business
 			try
 			{
 				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call(), -1);
+				Assert.Greater(Extractor.Business.DATManagerSingleton.Call(), -1);
 				this.blocker.WaitOne();
 			}
 			finally
@@ -40,7 +40,7 @@ namespace Extractor.UnitTest.Business
 			try
 			{
 				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("logo_sting_out.ambx_bn"), -1);
+				Assert.Greater(Extractor.Business.DATManagerSingleton.Call("logo_sting_out.ambx_bn"), -1);
 				this.blocker.WaitOne();
 			}
 			finally
@@ -55,7 +55,7 @@ namespace Extractor.UnitTest.Business
 			try
 			{
 				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("level.lub", "5"), -1);
+				Assert.Greater(Extractor.Business.DATManagerSingleton.Call("level.lub", "5"), -1);
 				this.blocker.WaitOne();
 			}
 			finally
@@ -70,7 +70,7 @@ namespace Extractor.UnitTest.Business
 			try
 			{
 				this.blocker.Reset();
-				Assert.Greater(Extractor.Business.DATManager.Call("file_does_not_exist.hora", "1"), -1);
+				Assert.Greater(Extractor.Business.DATManagerSingleton.Call("file_does_not_exist.hora", "1"), -1);
 				this.blocker.WaitOne();
 			}
 			finally
@@ -92,8 +92,8 @@ namespace Extractor.UnitTest.Business
 
 		private void releaseResources()
 		{
-			Extractor.Business.DATManager.DataReceived -= this.onDataReceived;
-			Extractor.Business.DATManager.Exited -= this.onExited;
+			Extractor.Business.DATManagerSingleton.DataReceived -= this.onDataReceived;
+			Extractor.Business.DATManagerSingleton.Exited -= this.onExited;
             this.blocker.Close();
             this.blocker.Dispose();
             this.blocker = null;

@@ -1,57 +1,46 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Extractor.Presentation.ViewModel
 {
-    public class FileMapManagerViewModel : Common.ViewModelBase
-    {
+	public class FileMapManagerViewModel : Common.ViewModelBase
+	{
 		public FileMapManagerViewModel()
 		{
-			Task.Factory.StartNew(this.readLzssFileMap);
+			Business.DAT dat = new Business.DAT();
+			dat.Exited += onDATExited;
+			dat.Call();
 		}
 
-		private void readLzssFileMap()
+		private void onDATExited(object sender, Business.DAT.ExitedEventArgs e)
 		{
-			try
+			Business.DAT dat = sender as Business.DAT;
+			dat.Exited -= onDATExited;
+
+			if (e.HasError)
+				throw new Exception(e.Error);
+
+			string output = e.Output;
+			if (!string.IsNullOrEmpty(output))
 			{
-				Business.DATManager.DataReceived += this.onDatDataReceived;
-				Business.DATManager.Exited += this.DatExisted;
-				Business.DATManager.Call();
-			}
-			catch
-			{
-				throw;
-			}
-		}
-
-		private void onDatDataReceived(int processID, string data)
-		{
-			if (!this.isRootFolderGenerated)
-			{
-				this.generateRootFolder(data);
-				this.isRootFolderGenerated = true;
+				var root = Business.LZSSFileMapParser.Parse(output);
+				if (root != null)
+				{
+					this.rootSource.Add(root);
+					this.NotifyPropertyChanged("RootSource");
+				}
 			}
 		}
 
-		private void DatExisted(int processID)
+		public FileMapManagerViewModel(Data.FolderData root)
 		{
-			Business.DATManager.DataReceived -= this.onDatDataReceived;
-			Business.DATManager.Exited -= this.DatExisted;
-		}
+			if (root == null)
+				throw new ArgumentNullException("root");
 
-		private bool isRootFolderGenerated = false;
-
-		private Data.FolderData rootFolder = null;
-		public Data.FolderData Root
-		{
-			get { return this.rootFolder; }
+			this.rootSource.Add(root);
+			this.NotifyPropertyChanged("RootSource");
 		}
 
 		private Common.AutoInvokeObservableCollection<Data.FolderData> rootSource =
@@ -60,48 +49,5 @@ namespace Extractor.Presentation.ViewModel
 		{
 			get { return this.rootSource; }
 		}
-
-		private void generateRootFolder(string data)
-		{
-			try
-			{
-				this.rootSource.Clear();
-				Data.FolderData root = null;
-				if (!string.IsNullOrWhiteSpace(data))
-				{
-					root = Business.LZSSFileMapParser.Parse(data);
-				}
-
-				if (root == null)
-				{
-					MessageBox.Show(data, "Cannot get file data from nfs file");
-				}
-				else
-				{
-					Data.FolderData fakeFolder = new Data.FolderData("test");
-					fakeFolder.Add(new Data.FileData(new Data.LZSSFileItem()
-					{
-						Name = "test.txt",
-						Index = 0,
-						Size = 100
-					}));
-					fakeFolder.Add(new Data.FileData(new Data.LZSSFileItem()
-					{
-						Name = "test.txt",
-						Index = 1,
-						Size = 100
-					}));
-					root.SubFolders[0].Add(fakeFolder);
-
-					this.rootFolder = root;
-					this.rootSource.Add(root);
-					this.NotifyPropertyChanged("RootSource");
-				}
-			}
-			catch
-			{
-				throw;
-			}
-		}
-    }
+	}
 }

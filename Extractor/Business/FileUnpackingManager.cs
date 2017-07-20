@@ -13,7 +13,7 @@ namespace Extractor.Business
 		static FileUnpackingManager()
 		{
 			//check output file after DAT.exe exited
-			Business.DATManager.Exited += onDATExited;
+			Business.DATManagerSingleton.Exited += onDATExited;
 		}
 
 		public static void Unpack(Data.FileDataBase fileData)
@@ -41,7 +41,7 @@ namespace Extractor.Business
 		{
 			var file = obj as Data.FileData;
 			file.TreeNode.State = Data.TreeNodeState.Processing;
-			int processID = Business.DATManager.Call(file.Name, file.Index.ToString());
+			int processID = Business.DATManagerSingleton.Call(file.Name, file.Index.ToString());
 			processMap.TryAdd(processID, file);
 		}
 

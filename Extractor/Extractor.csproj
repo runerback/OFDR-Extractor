@@ -78,7 +78,8 @@
     </Compile>
     <Compile Include="Business\CodeTimeChecker.cs" />
     <Compile Include="Business\ConfigManager.cs" />
-    <Compile Include="Business\DATManager.cs" />
+    <Compile Include="Business\DAT.cs" />
+    <Compile Include="Business\DATManagerSingleton.cs" />
     <Compile Include="Business\ExceptionManager.cs" />
     <Compile Include="Business\FileUnpackingManager.cs" />
     <Compile Include="Business\IOFilesManager.cs" />
@@ -97,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Presentation\ViewModelMetadata\SettingsViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
+    <Compile Include="Presentation\ViewModel\FileMapManagerViewModelTediously.cs" />
     <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
     <Compile Include="Presentation\ViewModel\SettingsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
