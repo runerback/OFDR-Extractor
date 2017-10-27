@@ -6,7 +6,6 @@
              xmlns:controls="clr-namespace:Extractor.Shell.Controls"
              xmlns:local="clr-namespace:Extractor.Shell.View">
     <UserControl.Resources>
-        
         <DataTemplate DataType="{x:Type models:TreeNodeType}">
             <Image Height="16" Width="16">
                 <Image.Style>
@@ -73,15 +72,24 @@
                                 extensions:IsVisibleExtension.Visible="{Binding IsChecked, Mode=OneWay}"/>
             </StackPanel>
         </DataTemplate>
-
     </UserControl.Resources>
 
     <controls:FileMapPresenter x:Name="map" ItemsSource="{Binding RootSource, Mode=OneWay, IsAsync=True}" BorderThickness="0">
         <controls:FileMapPresenter.Resources>
             <extensions:BindingProxy Data="{Binding}" x:Key="mapDataBindingProxy" />
+
+            <DataTemplate DataType="{x:Type models:MenuItemModel}">
+                <MenuItem Header="{Binding Title, Mode=OneWay}"
+                          ToolTip="{Binding Description, Mode=OneWay}"
+                          Command="{Binding Command, Mode=OneWay}"
+                          CommandParameter="{Binding Parent.DataContext, RelativeSource={RelativeSource TemplatedParent}}"/>
+            </DataTemplate>
         </controls:FileMapPresenter.Resources>
         <controls:FileMapPresenter.ContextMenu>
             <local:ContextMenuView DataContext="{Binding Path=Data.MenuDataContext, Mode=OneWay, Source={StaticResource mapDataBindingProxy}}" />
         </controls:FileMapPresenter.ContextMenu>
+        <controls:FileMapPresenter.FolderContextMenu>
+            <local:ContextMenuView DataContext="{Binding Path=Data.FolderMenuDataContext, Mode=OneWay, Source={StaticResource mapDataBindingProxy}}" />
+        </controls:FileMapPresenter.FolderContextMenu>
     </controls:FileMapPresenter>
 </UserControl>

@@ -51,9 +51,15 @@ namespace Extractor.Presentation.ViewModel
 		}
 
 		private FileMapMenuViewModel menuDataContext = new FileMapMenuViewModel();
-		public FileMapMenuViewModel MenuDataContext
+		public ContextMenuViewModelBase MenuDataContext
 		{
 			get { return this.menuDataContext; }
+		}
+
+		private FolderMenuViewModel folderMenuDataContext = new FolderMenuViewModel();
+		public ContextMenuViewModelBase FolderMenuDataContext
+		{
+			get { return this.folderMenuDataContext; }
 		}
 	}
 }

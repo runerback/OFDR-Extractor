@@ -89,6 +89,7 @@
     <Compile Include="Business\ReferenceComparer.cs" />
     <Compile Include="Business\StatusManager.cs" />
     <Compile Include="Controllers\Help\AboutController.cs" />
+    <Compile Include="Controllers\Hierarchy\HierarchyController.cs" />
     <Compile Include="Controllers\HomePageController.cs" />
     <Compile Include="Controllers\Tool\OptionsController.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -101,6 +102,7 @@
     <Compile Include="Presentation\ViewModel\ContextMenuViewModelBase.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FileMapManagerViewModelTediously.cs" />
+    <Compile Include="Presentation\ViewModel\FolderMenuViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FileMapMenuViewModel.cs" />
     <Compile Include="Presentation\ViewModel\FrameworkViewModel.cs" />
     <Compile Include="Presentation\ViewModel\SettingsViewModel.cs" />

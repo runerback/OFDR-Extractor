@@ -24,13 +24,31 @@ namespace Extractor.Shell.Controls
 
 		protected override System.Windows.DependencyObject GetContainerForItemOverride()
 		{
-			return new FolderDataPersenter();
+			return new FolderDataPersenter(this.FolderContextMenu);
 		}
 
 		protected override bool IsItemItsOwnContainerOverride(object item)
 		{
 			return item is FolderDataPersenter;
 		}
+
+
+		#region Context Menu
+
+		public ContextMenu FolderContextMenu
+		{
+			get { return (ContextMenu)this.GetValue(FolderContextMenuProperty); }
+			set { this.SetValue(FolderContextMenuProperty, value); }
+		}
+
+		public static readonly DependencyProperty FolderContextMenuProperty =
+			DependencyProperty.Register(
+				"FolderContextMenu",
+				typeof(ContextMenu),
+				typeof(FileMapPresenter));
+
+		#endregion Context Menu
+
 
 		protected override void OnPreviewDragOver(DragEventArgs e)
 		{

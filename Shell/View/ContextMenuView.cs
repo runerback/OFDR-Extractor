@@ -20,7 +20,7 @@ namespace Extractor.Shell.View
 			this.SetBinding(ItemsSourceProperty, new Binding("MenuItems") { Mode = BindingMode.OneWay });
 
 			//this.ItemTemplate = createMenuItemTemplate();
-			this.Resources.Add(typeof(MenuItem), getBoundMenuItemStyle());
+			//this.Resources.Add(typeof(MenuItem), getBoundMenuItemStyle());
 
 			base.OnInitialized(e);
 		}

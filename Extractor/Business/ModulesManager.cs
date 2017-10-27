@@ -20,7 +20,7 @@ namespace Extractor.Business
 				PageNavigator.Business.ModulesManager.Load();
 				PageNavigator.Business.ModuleControllerSchedule.SetModuleControllerMapping(moduleControllerMapping);
 				PageNavigator.Business.ModuleControllerSchedule.CreateModule(
-					new PageNavigator.Model.ModuleData("home", "Hierarchy"));
+					new PageNavigator.Model.ModuleData("home", "data_win"));
 				initialized = true;
 			}
 		}
@@ -35,6 +35,8 @@ namespace Extractor.Business
 					return new Controllers.Help.AboutController(moduleData);
 				case "home":
 					return new Controllers.HomePageController(moduleData);
+				case "hierarchy":
+					return new Controllers.HierarchyController(moduleData);
 				default:
 					throw new InvalidOperationException(
 						string.Format("not support for Module \"{0}\"", moduleData.Name));

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Extractor.Presentation.ViewModel
 {
@@ -10,12 +13,12 @@ namespace Extractor.Presentation.ViewModel
 	{
 		protected override void buildMenu()
 		{
-			var menuItem = new Data.MenuItemModel("Save as...", "Save current architecture to xml")
+			var saveAs = new Data.MenuItemModel("Save as...", "Save current architecture to xml")
 			{
 				Command = new Common.RelayCommand(this.saveMap)
 			};
 
-			this.menuItems.Add(menuItem);
+			this.menuItems.Add(saveAs);
 		}
 
 		private void saveMap(object obj)
